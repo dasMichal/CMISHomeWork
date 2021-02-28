@@ -11,7 +11,6 @@
 
         android:supportsRtl="true"
         android:theme="@style/Theme.CMIS435Ex01">
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".MainActivity3">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

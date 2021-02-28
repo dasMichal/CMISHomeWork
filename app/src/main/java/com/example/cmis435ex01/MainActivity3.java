@@ -8,8 +8,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelStore;
+
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -23,7 +26,7 @@ public class MainActivity3 extends AppCompatActivity {
     double average;
     final int[] array = new int[4];
     private int score = 0;
-    final int duration = 20000;
+    static final int duration = 20000;
 
     AlertDialog dialog;
 
@@ -41,7 +44,6 @@ public class MainActivity3 extends AppCompatActivity {
     MaterialCardView card3;
     MaterialCardView card4;
     public CountDownTimer counter;
-    Resources resources = getResources();
 
 
     @Override
@@ -53,45 +55,9 @@ public class MainActivity3 extends AppCompatActivity {
         roll();
     }
 
-    public void progress3() {
 
-        counter = new CountDownTimer(duration, 1000) {
-            int progressStatus = 0;
 
-            final int half = ((duration / 2) / 1000);
 
-            @Override
-            public void onTick(long millisUntilFinished) {
-                progressStatus++;
-                // secLeft.setText("seconds remaining: " + millisUntilFinished / 1000);
-                secLeft.setText(getString(R.string.time, (millisUntilFinished / 1000)));
-                if (progressStatus == half) {
-
-                    String text1 = getString(R.string.hint, average);
-                    // String text1 = res.getString(R.string.Score,score);
-                    hinttxt.setText(text1);
-
-                }
-                progressBar.setProgress(progressStatus, true);
-
-            }
-
-            @Override
-            public void onFinish() {
-                progressBar.setProgress(0);
-                progressStatus = 0;
-                score--;
-
-                String text1 = getString(R.string.Score, score);
-                scoretxt.setText(text1);
-                secLeft.setText(" ");
-                hinttxt.setText(" ");
-                roll();
-            }
-
-        };
-
-    }
 
     /**
      * Init function to assign all fields
@@ -140,6 +106,7 @@ public class MainActivity3 extends AppCompatActivity {
 
     private void roll() {
 
+
         Random r = new Random();
 
         // Create random numbers and Sae them to array
@@ -169,6 +136,7 @@ public class MainActivity3 extends AppCompatActivity {
         card4text.setText(" " + array[3]);
         card4.setOnClickListener(v -> compare(array, average, (Integer) card4.getTag()));
 
+        hinttxt.setText(" ");
         progressBar.setMax(duration / 1000); // Setting Progressbar length according to the Time duration
         progressBar.setProgress(0); // Resetting Progressbar
         progress3(); // Creating a Countdown timer
@@ -176,6 +144,8 @@ public class MainActivity3 extends AppCompatActivity {
         counter.start(); // Start a new countdown Timer
 
     }
+
+
 
     /**
      * @param array    Array with the random numbers
@@ -232,5 +202,49 @@ public class MainActivity3 extends AppCompatActivity {
 
         roll();
     }
+
+
+    public void progress3() {
+
+        counter = new CountDownTimer(duration, 1000) {
+            int progressStatus = 0;
+
+            final int half = ((duration / 2) / 1000);
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                progressStatus++;
+                // secLeft.setText("seconds remaining: " + millisUntilFinished / 1000);
+                secLeft.setText(getString(R.string.time, (millisUntilFinished / 1000)));
+                if (progressStatus == half) {
+
+                    String text1 = getString(R.string.hint, average);
+                    // String text1 = res.getString(R.string.Score,score);
+                    hinttxt.setText(text1);
+
+                }
+                progressBar.setProgress(progressStatus, true);
+
+            }
+
+            @Override
+            public void onFinish() {
+                progressBar.setProgress(0);
+                progressStatus = 0;
+                score--;
+                //hinttxt.setText(getResources().getString(R.string.strgfailed));
+
+                String text1 = getString(R.string.Score, score);
+                scoretxt.setText(text1);
+                secLeft.setText(" ");
+                hinttxt.setText(" ");
+
+                roll();
+            }
+
+        };
+
+    }
+
 
 }

@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">NumberGuessing</string>
+    <string name="app_name">AdvancedNumGuessGame</string>
     <string name="task_name">Select the number closest to the average of all four </string>
     <string name="Score">Score: %1$d</string>
     <string name="time">You have %1$d seconds left </string>
     <string name="hint">HINT! The average is %1$f</string>
     <string name="next_try">Continue</string>
+    <string name="strgfailed">To Slow.. Try next time </string>
 
 
 
