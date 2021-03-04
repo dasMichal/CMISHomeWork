@@ -1,9 +1,11 @@
 package com.example.cmis435ex01;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import androidx.lifecycle.ViewModelStore;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -46,6 +49,14 @@ public class MainActivity3 extends AppCompatActivity {
     public CountDownTimer counter;
 
 
+    Intent in = getIntent();
+    String usrName = in.getStringExtra("usrName");
+    int numberFields = in.getIntExtra("numberFields",4);
+    ArrayList<Parcelable> RandomBound = in.getParcelableArrayListExtra("RandomBound");
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +75,7 @@ public class MainActivity3 extends AppCompatActivity {
      */
     private void init()         //Assign all the Objects in one Place
     {
+
 
         progressBar = findViewById(R.id.progressBar2);
         secLeft = findViewById(R.id.secleft);

@@ -6,7 +6,13 @@
     <string name="hint">HINT! The average is %1$f</string>
     <string name="next_try">Continue</string>
     <string name="strgfailed">To Slow.. Try next time </string>
-
+    <string name="settingText">Select your parameters </string>
+    <string name="numbrSliderText">You have selected %1$d numbers </string>
+    <string name="placeholderInputName">Enter your name</string>
+    <string name="nameEmptyError">Name can\'t be Empty</string>
+    <string name="startgame">Start the Game</string>
+    <string name="numOfNumbers">Number of numbers</string>
+    <string name="rangeOfRandom">Range of Random Numbers</string>
 
 
 </resources>

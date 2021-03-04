@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimarySurface"
+        android:hapticFeedbackEnabled="false"
+        android:layerType="hardware">
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/infobox"
+            android:layout_width="351dp"
+            android:layout_height="425dp"
+            android:clipToPadding="false"
+            android:contextClickable="true"
+            android:textAlignment="center"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="7dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.882"
+            app:cardMaxElevation="10dp">
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="313dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:textAlignment="gravity"
+                tools:layout_editor_absoluteY="385dp"
+                tools:layout_editor_absoluteX="11dp">
+
+            <TextView
+                    android:text="@string/settingText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/settingText"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="20dp" />
+
+            <EditText
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoCorrect|textPersonName|textAutoComplete"
+                    android:ems="10"
+                    android:id="@+id/userNameInput"
+                    android:layout_marginBottom="20dp"
+                    android:textAlignment="center"
+                    android:hint="@string/placeholderInputName"
+                    android:autofillHints="" />
+
+            <TextView
+                    android:text="@string/numOfNumbers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView4"
+                    android:textAlignment="center" />
+
+            <com.google.android.material.slider.Slider
+
+                    android:valueFrom="2"
+                    android:valueTo="9"
+                    android:stepSize="1"
+                    android:layout_width="266dp"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/numbrSlider"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content" />
+
+            <TextView
+                    android:text="@string/rangeOfRandom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView5"
+                    android:textAlignment="center" />
+
+            <com.google.android.material.slider.RangeSlider
+
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    android:stepSize="10"
+                    android:layout_width="287dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/randomNumberBoundSlider"
+                    app:values="@array/initial_slider_values" />
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="locale"
+                    android:animateLayoutChanges="true"
+                    android:layout_margin="20dp">
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                <Button
+                        android:text="@string/startgame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/startMainGame"
+                        android:layerType="hardware"
+                        android:layoutDirection="locale" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+            android:text="@start"
+            android:layout_width="105dp"
+            android:layout_height="31dp"
+            android:id="@+id/numbrSliderText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="80dp"
+            android:layout_marginStart="144dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
