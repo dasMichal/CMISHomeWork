@@ -2,15 +2,29 @@ package com.example.cmis435ex01;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ButtonBarLayout;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Parcelable;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -38,8 +52,12 @@ public class SettingsActivityActivity extends AppCompatActivity
 	Slider numbrSlider;
 	RangeSlider randomNumberBoundSlider;
 	Button startMainGame;
+	Button testBtt;
 	MaterialCardView card1;
 	public CountDownTimer counter;
+	TableRow tr;
+
+
 
 
 
@@ -64,8 +82,6 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 
 
-
-
 		randomNumberBoundSlider = findViewById(R.id.randomNumberBoundSlider);
 		numbrSliderText = findViewById(R.id.numbrSliderText);
 
@@ -74,8 +90,9 @@ public class SettingsActivityActivity extends AppCompatActivity
 		userNameInput = findViewById(R.id.userNameInput);
 
 		startMainGame = findViewById(R.id.startMainGame);
-
-
+		testBtt = findViewById(R.id.testBtt);
+		System.out.println("Hi");
+		System.out.println(startMainGame.getLayoutParams());
 
 
 
@@ -100,6 +117,88 @@ public class SettingsActivityActivity extends AppCompatActivity
 */
 
 
+	private void test(int inputVal)
+	{
+
+		System.out.println("Hello, its Me");
+		System.out.println("Nr: "+inputVal);
+	}
+
+	private void testLayout()
+	{
+
+		TableLayout mytable = findViewById(R.id.Testtable);
+
+		mytable.removeAllViews();
+		mytable.setPadding(0,10,0,10);
+
+
+		TableLayout.LayoutParams TableLayout = new TableLayout.LayoutParams(android.widget.TableLayout.LayoutParams.MATCH_PARENT, android.widget.TableLayout.LayoutParams.MATCH_PARENT);
+		TableLayout.weight = 1;
+		//TableLayout.gravity= Gravity.CENTER;
+		//TableLayout.setMargins(10,10 ,10,10);
+
+
+		TableRow.LayoutParams RowLayout = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+		RowLayout.weight = 1;
+		RowLayout.gravity= Gravity.CENTER;
+		RowLayout.setMargins(10,20 ,10,20);
+
+
+
+
+
+		for (int i = 0; i < 4; i++)
+		{
+
+			//System.out.println(i%2);
+			if (i % 2 == 0)
+			{
+				//System.out.println("modulo if");
+				tr = new TableRow(this);
+				//tr.setLayoutParams(LinearLayout);
+				tr.setLayoutParams(TableLayout);
+
+				mytable.addView(tr);
+
+			}
+
+			MaterialCardView testcrd = new MaterialCardView(this);
+			TextView cardtxt = new TextView(this);
+			cardtxt.setText(" "+(i+1));
+			cardtxt.setGravity(Gravity.CENTER);
+
+
+
+			testcrd.setId(i);
+			testcrd.setTag(i);
+			testcrd.setElevation(10);
+			testcrd.addView(cardtxt);
+			testcrd.setLayoutParams(RowLayout);
+			testcrd.setOnClickListener(v -> test((Integer) testcrd.getTag()));
+			tr.addView(testcrd);
+
+			/*
+			//set the properties for button
+			Button btnTag = new Button(this);
+			btnTag.setText(" "+i);
+			btnTag.setId(i);
+			btnTag.setLayoutParams(RowLayout);
+
+			//add button to the layout
+			tr.addView(btnTag);
+
+			 */
+
+
+		}
+
+
+
+	}
+
+
+
 
 	private void logic()
 	{
@@ -110,6 +209,8 @@ public class SettingsActivityActivity extends AppCompatActivity
 			System.out.println("NumberSlider= "+value);
 			String text1 = getString(R.string.numbrSliderText, (int) value);
 			numbrSliderText.setText(text1);
+			//System.out.println(userNameInput.getText());
+
 
 
 		});
@@ -132,7 +233,10 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 
 
-
+		testBtt.setOnClickListener(v ->
+		{
+			testLayout();
+		});
 
 
 
@@ -148,9 +252,10 @@ public class SettingsActivityActivity extends AppCompatActivity
 				return;
 			}
 
+			String temp= userNameInput.getText().toString();
 			Intent intent = new Intent(SettingsActivityActivity.this, MainActivity3.class);
-			intent.putExtra("usrName",userNameInput.getText());
-			intent.putExtra("numberFields",numbrSlider.getValue());
+			intent.putExtra("usrName",temp);
+			intent.putExtra("numberFields",(int) numbrSlider.getValue());
 			intent.putExtra("RandomBound", (Parcelable) rangeArray);
 			startActivity(intent);
 

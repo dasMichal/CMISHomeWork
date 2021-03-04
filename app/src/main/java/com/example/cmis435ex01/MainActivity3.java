@@ -49,10 +49,6 @@ public class MainActivity3 extends AppCompatActivity {
     public CountDownTimer counter;
 
 
-    Intent in = getIntent();
-    String usrName = in.getStringExtra("usrName");
-    int numberFields = in.getIntExtra("numberFields",4);
-    ArrayList<Parcelable> RandomBound = in.getParcelableArrayListExtra("RandomBound");
 
 
 
@@ -61,6 +57,14 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        Intent in = getIntent();
+        String usrName = in.getStringExtra("usrName");
+        int numberFields = in.getIntExtra("numberFields",4);
+        ArrayList<Parcelable> RandomBound = in.getParcelableArrayListExtra("RandomBound");
+
+        System.out.println(usrName);
+        System.out.println(numberFields);
+
         init();
 
         roll();
