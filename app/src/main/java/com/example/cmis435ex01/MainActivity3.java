@@ -6,7 +6,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Parcelable;
+import android.view.Gravity;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,33 +23,35 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainActivity3 extends AppCompatActivity {
 
     // All Variables in Global use
     double average;
-    final int[] array = new int[4];
     private int score = 0;
     static final int duration = 20000;
+    int numberFields;
+    String usrName;
+    List<Integer> ranNumbers = new ArrayList<>();
+    float[] randomNumberRange = new float[2];
 
-    AlertDialog dialog;
 
     // Declare all the Objects
     ProgressBar progressBar;
     TextView secLeft;
     TextView hinttxt;
     TextView scoretxt;
-    TextView card1text;
-    TextView card2text;
-    TextView card3text;
-    TextView card4text;
-    MaterialCardView card1;
-    MaterialCardView card2;
-    MaterialCardView card3;
-    MaterialCardView card4;
+    AlertDialog dialog;
     public CountDownTimer counter;
+    TableRow tr;
+    Random r = new Random();
+
 
 
 
@@ -57,17 +62,19 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        Intent in = getIntent();
-        String usrName = in.getStringExtra("usrName");
-        int numberFields = in.getIntExtra("numberFields",4);
-        ArrayList<Parcelable> RandomBound = in.getParcelableArrayListExtra("RandomBound");
 
-        System.out.println(usrName);
-        System.out.println(numberFields);
+        Intent in = getIntent();
+        usrName = in.getStringExtra("usrName");
+        numberFields = in.getIntExtra("numberFields",4);
+        randomNumberRange = in.getFloatArrayExtra("RandomBound");
+
+        //System.out.println(usrName);
+        //System.out.println(numberFields);
+
+
 
         init();
-
-        roll();
+        roll2();
     }
 
 
@@ -87,19 +94,6 @@ public class MainActivity3 extends AppCompatActivity {
         scoretxt = findViewById(R.id.score);
 
 
-        //Creating the Material Cards
-        card1 = findViewById(R.id.card1);
-        card1text = findViewById(R.id.card1text);
-
-        card2 = findViewById(R.id.card2);
-        card2text = findViewById(R.id.card2text);
-
-        card3 = findViewById(R.id.card3);
-        card3text = findViewById(R.id.card3text);
-
-        card4 = findViewById(R.id.card4);
-        card4text = findViewById(R.id.card4text);
-
         //Tried doing an alert. Didn't get it to work
         /*
         MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder((card1text.getContext()));
@@ -114,44 +108,94 @@ public class MainActivity3 extends AppCompatActivity {
         dialog = materialAlertDialogBuilder.show();
 
         */
+
         String text1 = getString(R.string.Score,0);
         scoretxt.setText(" "+text1);
         hinttxt.setText(" ");
 
     }
 
-    private void roll() {
+
+    public int randomNumber()
+    {
+
+        System.out.println(randomNumberRange[0]);
+        System.out.println(randomNumberRange[1]);
+        int low = (int) randomNumberRange[0];
+        int high = (int) randomNumberRange[1];
+        high = high+1;
+        //int result = r.nextInt(high-low) + low;
+
+        //return r.nextInt(9);
+        return r.nextInt(high-low) + low;
+    }
+
+    private void roll2() {
 
 
-        Random r = new Random();
+        // Create random numbers and add them to List
 
-        // Create random numbers and Sae them to array
-        for (int i = 0; i < array.length; i++) {
-            array[i] = r.nextInt(9);
-            System.out.println(i);
-            System.out.println(array[i]);
+        boolean notInList = false;
+        ranNumbers.clear();
+
+        for (int i = 0; i < numberFields; i++)
+        {
+
+
+            do
+            {
+
+                int tmp = randomNumber();
+
+                long count = ranNumbers.stream().filter(ranNumbers -> Objects.equals(tmp, ranNumbers)).count();
+                System.out.println("Loopcount "+i+"| "+tmp+" occures "+count);
+
+                if (count == 0)
+                {
+                    notInList= true;
+
+                }else  notInList= false;
+
+                ranNumbers.add(tmp);
+
+
+
+
+
+            }while(!notInList);
+
+
+
+
+
+
+            //System.out.print(ranNumbers.get(i)+",");
+
         }
 
-        // calculate average of the numbers
-        average = (array[0] + array[1] + array[2] + array[3]);
-        average = average / 4;
+        Map<Integer, Long> counts = ranNumbers.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        System.out.println(" ");
+        System.out.print("Map ");
+        System.out.println(counts);
 
-        card1.setTag(array[0]); // Setting the Object tag with its value to be able to retrieve it later
-        card1text.setText(" " + array[0]);
-        card1.setOnClickListener(v -> compare(array, average, (Integer) card1.getTag()));
 
-        card2.setTag(array[1]);
-        card2text.setText(" " + array[1]);
-        card2.setOnClickListener(v -> compare(array, average, (Integer) card2.getTag()));
+        System.out.println("Keys ");
+        counts.forEach((k, v) -> {
+            System.out.println("Key: " + k + ", Value: " + v);
+        });
 
-        card3.setTag(array[2]);
-        card3text.setText(" " + array[2]);
-        card3.setOnClickListener(v -> compare(array, average, (Integer) card3.getTag()));
 
-        card4.setTag(array[3]);
-        card4text.setText(" " + array[3]);
-        card4.setOnClickListener(v -> compare(array, average, (Integer) card4.getTag()));
 
+        System.out.println(" ");
+        average = ranNumbers.stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Sum "+average);
+        average = average/numberFields;
+        System.out.println("Average "+average);
+        //System.out.println(ranNumbers.size());
+
+
+
+        createGameField(ranNumbers,numberFields,average);
         hinttxt.setText(" ");
         progressBar.setMax(duration / 1000); // Setting Progressbar length according to the Time duration
         progressBar.setProgress(0); // Resetting Progressbar
@@ -163,20 +207,19 @@ public class MainActivity3 extends AppCompatActivity {
 
 
 
+
     /**
-     * @param array    Array with the random numbers
+     * @param ranNumbers    Array with the random numbers
      * @param average  Average of the numbers from the Array
      * @param inputVal Value the User had selected
      */
-    private void compare(int[] array, double average, int inputVal) {
+    private void compare2(List<Integer> ranNumbers, double average, int inputVal) {
 
-        System.out.println(progressBar.getProgress());
+
         int closest = 0;
         double diff;
-        Arrays.sort(array);
-        System.out.println(Arrays.toString(array));
 
-        for (int value : array) {
+        for (int value : ranNumbers) {
             // System.out.print(array[i]+", ");
             diff = Math.abs(average - value);
 
@@ -194,6 +237,65 @@ public class MainActivity3 extends AppCompatActivity {
         check2(inputVal, closest);
 
     }
+
+    private void createGameField(List<Integer> ranNumbers, int numberFields, double average)
+    {
+
+        TableLayout TableGameField = findViewById(R.id.TableGameField);
+
+        TableGameField.removeAllViews();
+        TableGameField.setPadding(0,10,0,10);
+
+        TableLayout.LayoutParams TableLayout = new TableLayout.LayoutParams(android.widget.TableLayout.LayoutParams.MATCH_PARENT, android.widget.TableLayout.LayoutParams.MATCH_PARENT);
+        TableLayout.weight = 1;
+
+        TableRow.LayoutParams RowLayout = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        RowLayout.weight = 1;
+        RowLayout.gravity= Gravity.CENTER;
+        RowLayout.setMargins(10,20 ,10,20);
+
+
+
+
+
+        for (int i = 0; i < numberFields; i++)
+        {
+
+            //System.out.println(i%2);
+            if (i % 2 == 0)
+            {
+                //System.out.println("modulo if");
+                tr = new TableRow(this);
+                tr.setLayoutParams(TableLayout);
+                TableGameField.addView(tr);
+
+            }
+
+            MaterialCardView playCard = new MaterialCardView(this);
+            TextView playCardText = new TextView(this);
+            playCardText.setText(" "+ranNumbers.get(i));
+            playCardText.setGravity(Gravity.CENTER);
+
+
+
+            playCard.setId(i);
+            playCard.setTag(ranNumbers.get(i));
+            playCard.setElevation(10);
+            playCard.addView(playCardText);
+            playCard.setLayoutParams(RowLayout);
+            playCard.setOnClickListener(v -> compare2(ranNumbers, average, (Integer) playCard.getTag()));
+            tr.addView(playCard);
+
+
+        }
+
+    }
+
+
+
+
+
+
 
     /**
      * @param selectedVal Value the User had selected
@@ -216,7 +318,7 @@ public class MainActivity3 extends AppCompatActivity {
         String text1 = getString(R.string.Score, score);
         scoretxt.setText(text1);
 
-        roll();
+        roll2();
     }
 
 
@@ -255,7 +357,7 @@ public class MainActivity3 extends AppCompatActivity {
                 secLeft.setText(" ");
                 hinttxt.setText(" ");
 
-                roll();
+                roll2();
             }
 
         };

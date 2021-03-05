@@ -1,36 +1,25 @@
 package com.example.cmis435ex01;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ButtonBarLayout;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsActivityActivity extends AppCompatActivity
@@ -38,8 +27,9 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 	// All Variables in Global use
 	double average;
-	List<Float> rangeArray;
-	static final int duration = 20000;
+	List<Float> rangeArray = new ArrayList<>();
+	float[] randomNumberRange = new float[2];
+
 
 	AlertDialog dialog;
 
@@ -146,9 +136,9 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 
 
+		int sliderVal = (int) numbrSlider.getValue();
 
-
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < sliderVal; i++)
 		{
 
 			//System.out.println(i%2);
@@ -175,7 +165,7 @@ public class SettingsActivityActivity extends AppCompatActivity
 			testcrd.setElevation(10);
 			testcrd.addView(cardtxt);
 			testcrd.setLayoutParams(RowLayout);
-			testcrd.setOnClickListener(v -> test((Integer) testcrd.getTag()));
+			//testcrd.setOnClickListener(v -> test((Integer) testcrd.getTag()));
 			tr.addView(testcrd);
 
 			/*
@@ -209,6 +199,7 @@ public class SettingsActivityActivity extends AppCompatActivity
 			System.out.println("NumberSlider= "+value);
 			String text1 = getString(R.string.numbrSliderText, (int) value);
 			numbrSliderText.setText(text1);
+			//testLayout();
 			//System.out.println(userNameInput.getText());
 
 
@@ -219,10 +210,9 @@ public class SettingsActivityActivity extends AppCompatActivity
 		randomNumberBoundSlider.addOnChangeListener((slider, value, fromUser) ->
 		{
 			rangeArray = slider.getValues();
-			//System.out.println("BoundSliderValue1= "+value);
-			//System.out.println("BoundSliderValue2= "+value);
-			System.out.println("BoundSliderValue1= "+ rangeArray.get(0));
-			System.out.println("BoundSliderValue2= "+ rangeArray.get(1));
+			randomNumberRange[0]= rangeArray.get(0);
+			randomNumberRange[1]= rangeArray.get(1);
+
 
 
 			//String text1 = getString(R.string.numbrSliderText, value);
@@ -256,7 +246,10 @@ public class SettingsActivityActivity extends AppCompatActivity
 			Intent intent = new Intent(SettingsActivityActivity.this, MainActivity3.class);
 			intent.putExtra("usrName",temp);
 			intent.putExtra("numberFields",(int) numbrSlider.getValue());
-			intent.putExtra("RandomBound", (Parcelable) rangeArray);
+			//intent.putExtra("RandomBound",rangeArray);
+			intent.putExtra("RandomBound",randomNumberRange);
+
+
 			startActivity(intent);
 
 
