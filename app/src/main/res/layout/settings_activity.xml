@@ -5,21 +5,23 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimarySurface"
         android:hapticFeedbackEnabled="false"
         android:layerType="hardware"
-        android:id="@+id/SettingUI">
+        android:id="@+id/SettingUI"
+        android:background="?attr/colorPrimarySurface">
 
 
-    <TextView
-            android:text="PLACEHOLDER"
-            android:layout_width="105dp"
-            android:layout_height="31dp"
-            android:id="@+id/numbrSliderText"
+    <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar2"
+            app:titleTextColor="@android:color/primary_text_dark"
             app:layout_constraintStart_toStartOf="parent"
+            app:title="@string/settingText"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="264dp"
-            android:layout_marginStart="144dp" />
+            android:background="@color/design_default_color_primary" />
 
     <TableLayout
             android:layout_width="0dp"
@@ -61,8 +63,8 @@
 
     <com.google.android.material.card.MaterialCardView
             android:id="@+id/infobox"
-            android:layout_width="375dp"
-            android:layout_height="343dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:contextClickable="true"
             android:textAlignment="center"
@@ -74,14 +76,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.882"
-            app:cardMaxElevation="10dp">
+            app:cardMaxElevation="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+            android:layout_marginHorizontal="5dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.318">
 
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="313dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:textAlignment="gravity"
@@ -90,11 +94,13 @@
 
             <TextView
                     android:text="@string/settingText"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/settingText"
-                    android:layout_weight="1"
                     android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:textSize="30sp"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:layout_marginBottom="20dp" />
 
             <EditText
@@ -113,36 +119,76 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView4"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="24sp" />
 
-            <com.google.android.material.slider.Slider
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
 
-                    android:valueFrom="2"
-                    android:valueTo="9"
-                    android:stepSize="1"
-                    android:layout_width="266dp"
-                    android:layout_marginBottom="20dp"
-                    android:id="@+id/numbrSlider"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content" />
+                <com.google.android.material.slider.Slider
+
+                        android:valueFrom="2"
+                        android:valueTo="9"
+                        android:stepSize="1"
+                        android:layout_width="266dp"
+                        android:id="@+id/numbrSlider"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="wrap_content" />
+
+                <TextView
+                        android:text="@string/numOfNumbersValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/numbrSliderText"
+                        android:gravity="center"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_gravity="center"
+                        android:foregroundGravity="center"
+                        android:textAlignment="gravity" />
+            </LinearLayout>
 
             <TextView
                     android:text="@string/rangeOfRandom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView5"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="24sp" />
 
-            <com.google.android.material.slider.RangeSlider
-
-                    android:valueFrom="0"
-                    android:valueTo="100"
-                    android:stepSize="10"
-                    android:layout_width="287dp"
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:id="@+id/randomNumberBoundSlider"
-                    app:values="@array/initial_slider_values" />
+                    android:layout_marginBottom="30dp">
+
+                <com.google.android.material.slider.RangeSlider
+
+                        android:valueFrom="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/randomNumberBoundSlider"
+                        app:values="@array/initial_slider_values"
+                        android:valueTo="20"
+                        android:layout_weight="1" />
+
+                <TextView
+                        android:text="@string/rangeOfRandomValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/randomNumberBoundText"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_weight="0"
+                        android:gravity="center"
+                        android:layout_gravity="center" />
+            </LinearLayout>
 
             <LinearLayout
                     android:orientation="horizontal"
@@ -158,7 +204,9 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/testBtt"
                         android:layout_weight="1"
-                        android:layout_marginHorizontal="20dp" />
+                        android:layout_marginHorizontal="20dp"
+                        tools:visibility="gone"
+                        android:visibility="gone" />
 
                 <Space
                         android:layout_width="match_parent"
