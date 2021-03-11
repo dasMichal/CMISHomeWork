@@ -74,6 +74,7 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 		settingText = findViewById(R.id.settingText);
 		userNameInput = findViewById(R.id.userNameInput);
+		userNameInput.setAutofillHints(View.AUTOFILL_HINT_NAME); //Set Autofill to fill in the Name of Phone User if available
 
 		startMainGame = findViewById(R.id.startMainGame);
 
