@@ -124,6 +124,31 @@ public class SettingsActivityActivity extends AppCompatActivity
 				return;
 			}
 
+
+			rangeArray = randomNumberBoundSlider.getValues();
+
+			randomNumberRange[0]= rangeArray.get(0).intValue();
+			randomNumberRange[1]= rangeArray.get(1).intValue();
+
+			if (randomNumberRange[0] == randomNumberRange[1])
+			{
+				new MaterialAlertDialogBuilder(this)
+						.setTitle(getResources().getString(R.string.dialogerror))
+						.setMessage(getResources().getString(R.string.dialogranError))
+						.setCancelable(true)
+						.setPositiveButton("ok",(dialog, which) ->  {
+							{
+
+								randomNumberBoundSlider.setValues((float) 1.0, (float) 10.0);
+							}
+						}).show();
+
+				return;
+			}
+
+			System.out.println(randomNumberRange[0]);
+			System.out.println(randomNumberRange[1]);
+
 			String temp= userNameInput.getText().toString();
 			Intent intent = new Intent(SettingsActivityActivity.this, MainActivity3.class);
 			intent.putExtra("usrName",temp);
