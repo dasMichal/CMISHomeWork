@@ -1,10 +1,9 @@
 package com.example.cmis435ex01;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Parcelable;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -13,18 +12,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class MainActivity3 extends AppCompatActivity {
