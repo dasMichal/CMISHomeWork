@@ -153,13 +153,13 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 			String temp= userNameInput.getText().toString();
 			Intent intent = new Intent(SettingsActivityActivity.this, MainActivity3.class);
-			intent.putExtra("usrName",temp);
-			intent.putExtra("numberFields",(int) numbrSlider.getValue());
-			//intent.putExtra("RandomBound",rangeArray);
-			intent.putExtra("RandomBound",randomNumberRange);
+
+			intent.putExtra("usrName",temp);            //Send Username to next Activity
+			intent.putExtra("numberFields",(int) numbrSlider.getValue()); //Send the Amount of Numbers selected to next Activity
+			intent.putExtra("RandomBound",randomNumberRange); //Send the Random numbers as float Array to next Activity
 
 
-			startActivity(intent);
+			startActivity(intent);      //Start New activity
 
 
 		});
