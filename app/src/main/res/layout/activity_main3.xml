@@ -211,7 +211,15 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="30sp"
                     tools:layout_editor_absoluteY="568dp"
-                    tools:layout_editor_absoluteX="11dp" />
+                    tools:layout_editor_absoluteX="11dp"
+                    android:layout_marginBottom="20dp" />
+
+            <Button
+                    android:text="@string/endButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endGame"
+                    android:layout_weight="1" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
