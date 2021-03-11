@@ -318,7 +318,10 @@ public class MainActivity3 extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 progressStatus++;
                 // secLeft.setText("seconds remaining: " + millisUntilFinished / 1000);
-                secLeft.setText(getString(R.string.time, (millisUntilFinished / 1000)));
+                //secLeft.setText(getString(R.string.time, (millisUntilFinished / 1000)));
+
+
+                secLeft.setText(getResources().getQuantityString(R.plurals.timePlural, (int) (millisUntilFinished / 1000), (int) (millisUntilFinished / 1000)));
                 if (progressStatus == half) {
 
                     String text1 = getString(R.string.hint, average);
