@@ -1,6 +1,5 @@
 package com.example.cmis435ex01;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -350,6 +349,49 @@ public class MainActivity3 extends AppCompatActivity {
         };
 
     }
+
+    /**
+     *
+     * @param usrName   Player Name
+     * @param scoreArray    Array with the Points
+     * @param totalScore    Totale Score of Game
+     */
+    private void endGame(String usrName, int[] scoreArray, int totalScore)
+    {
+
+
+
+        Intent intent = new Intent(MainActivity3.this, ScoreboardActivity.class);
+
+
+        //intent.putExtra("RandomBound",rangeArray);
+
+        //Sending the username and score to endActivity
+        intent.putExtra("usrName",usrName);
+        intent.putExtra("scoreArray",scoreArray);
+        intent.putExtra("totalScore",totalScore);
+
+
+        startActivity(intent);
+
+
+    }
+
+
+
+
+
+
+    /**
+     *
+     * @param dp Pixel Value to convert it to dp
+     * @return  Returns the Value
+     */
+    public float dptopx(float dp)
+    {
+        return dp * getResources().getDisplayMetrics().density;
+    }
+
 
 
 }
