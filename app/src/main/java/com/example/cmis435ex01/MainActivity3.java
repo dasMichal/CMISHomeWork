@@ -41,6 +41,7 @@ public class MainActivity3 extends AppCompatActivity {
     String usrName;
     List<Integer> ranNumbers = new ArrayList<>();
     float[] randomNumberRange = new float[2];
+    int[]  scoreArray = new int[2];
 
 
     // Declare all the Objects
@@ -289,11 +290,13 @@ public class MainActivity3 extends AppCompatActivity {
 
         if (selectedVal == closest) {
             score++;
+            scoreArray[0]= scoreArray[0] +1;
             Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
             hinttxt.setText(" ");
 
         } else {
             score--;
+            scoreArray[1]= scoreArray[1] +1;
             Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
         }
         counter.cancel();
@@ -333,6 +336,7 @@ public class MainActivity3 extends AppCompatActivity {
                 progressBar.setProgress(0);
                 progressStatus = 0;
                 score--;
+                scoreArray[1]= scoreArray[1] +1;
                 //hinttxt.setText(getResources().getString(R.string.strgfailed));
 
                 String text1 = getString(R.string.Score, score);
