@@ -3,7 +3,6 @@
         package="com.example.cmis435ex01">
 
     <application
-
             android:hardwareAccelerated="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -11,18 +10,13 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.CMIS435Ex01">
         <activity android:name=".SettingsActivityActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-        <activity android:name=".MainActivity3">
-
-        </activity>
+        <activity android:name=".MainActivity3" />
     </application>
 
 </manifest>
