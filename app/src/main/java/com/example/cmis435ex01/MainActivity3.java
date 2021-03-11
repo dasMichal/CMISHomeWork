@@ -61,14 +61,11 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        //Receive the Intents from previous Activity
         Intent in = getIntent();
         usrName = in.getStringExtra("usrName");
         numberFields = in.getIntExtra("numberFields",4);
         randomNumberRange = in.getFloatArrayExtra("RandomBound");
-
-        //System.out.println(usrName);
-        //System.out.println(numberFields);
-
 
 
         init();
@@ -189,7 +186,7 @@ public class MainActivity3 extends AppCompatActivity {
 
 
     /**
-     * @param ranNumbers    Array with the random numbers
+     * @param ranNumbers    List with the random numbers
      * @param average  Average of the numbers from the Array
      * @param inputVal Value the User had selected
      */
@@ -218,8 +215,15 @@ public class MainActivity3 extends AppCompatActivity {
 
     }
 
+    /**
+     * @param ranNumbers    List with the random numbers
+     * @param numberFields  Amount of Numbers the User Selected
+     * @param average The Calculated average from the Random Numbers
+     */
     private void createGameField(List<Integer> ranNumbers, int numberFields, double average)
     {
+
+        //Setting Layouts for Tables and Rows
 
         TableLayout TableGameField = findViewById(R.id.TableGameField);
 
@@ -304,7 +308,9 @@ public class MainActivity3 extends AppCompatActivity {
         roll2();
     }
 
-
+    /**
+     * Function with the Countdown Timer
+     */
     public void progress3() {
 
         counter = new CountDownTimer(duration, 1000) {
