@@ -16,10 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelStore;
-
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -241,40 +238,41 @@ public class MainActivity3 extends AppCompatActivity {
 
 
 
-        for (int i = 0; i < numberFields; i++)
+        for (int i = 0; i < numberFields; i++) //Check if no more that two cards in each Row
         {
-
-            //System.out.println(i%2);
-            if (i % 2 == 0)
+            if (i % 2 == 0)         //Else create new Row
             {
-                //System.out.println("modulo if");
                 tr = new TableRow(this);
                 tr.setLayoutParams(TableLayout);
                 TableGameField.addView(tr);
-
             }
 
-            MaterialCardView playCard = new MaterialCardView(this);
-            TextView playCardText = new TextView(this);
+
+            CardView playCard = new CardView(this); //Create new CardView
+            TextView playCardText = new TextView(this); //Create corresponding new TextView
+
+
             playCardText.setText(" "+ranNumbers.get(i));
             playCardText.setGravity(Gravity.CENTER);
+            playCardText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 
+
+            playCard.setMinimumWidth((int) dptopx(100));
+            playCard.setMinimumHeight((int) dptopx(80));
+            playCard.setContentPadding((int) dptopx(10),(int) dptopx(10),(int) dptopx(10),(int) dptopx(10));
 
 
             playCard.setId(i);
-            playCard.setTag(ranNumbers.get(i));
-            playCard.setElevation(10);
-            playCard.addView(playCardText);
-            playCard.setLayoutParams(RowLayout);
-            playCard.setOnClickListener(v -> compare2(ranNumbers, average, (Integer) playCard.getTag()));
-            tr.addView(playCard);
+            playCard.setTag(ranNumbers.get(i)); //Setting the Value the Card has as its Tag to easily extract it later
+            playCard.setElevation((int) dptopx(2));
+            playCard.addView(playCardText);     //Add TextView to the CardView so the Text stays with the Card
+            playCard.setLayoutParams(RowLayout);    //Applies the RowLayout parameters to the cardView
 
+            playCard.setOnClickListener(v -> compare2(ranNumbers, average, (Integer) playCard.getTag())); //Attaches a onClick to each CardView
+            tr.addView(playCard);   //Adds the CardView with its TextView to the Table Row
 
         }
-
     }
-
-
 
 
 
