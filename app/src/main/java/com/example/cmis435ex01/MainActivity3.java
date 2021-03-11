@@ -43,7 +43,7 @@ public class MainActivity3 extends AppCompatActivity {
     Button endGame;
     public CountDownTimer counter;
     TableRow tr;
-    Random r = new Random();
+    final Random r = new Random();
 
 
 
