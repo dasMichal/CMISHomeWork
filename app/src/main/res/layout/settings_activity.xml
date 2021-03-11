@@ -23,44 +23,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:background="@color/design_default_color_primary" />
 
-    <TableLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/numbrSliderText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/Testtable"
-            android:paddingVertical="10dp"
-            android:visibility="gone"
-            tools:visibility="gone" />
-
-    <com.google.android.material.card.MaterialCardView
-            android:id="@+id/testcard1"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="120dp"
-            android:layout_marginBottom="480dp"
-            app:cardBackgroundColor="?attr/cardBackgroundColor"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="5dp"
-            app:contentPadding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:visibility="gone">
-
-        <com.google.android.material.card.MaterialCardView
-                android:id="@+id/testcard2"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="120dp"
-                android:layout_marginBottom="480dp"
-                app:cardBackgroundColor="?attr/cardBackgroundColor"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="5dp"
-                app:contentPadding="10dp" />
-    </com.google.android.material.card.MaterialCardView>
-
     <com.google.android.material.card.MaterialCardView
             android:id="@+id/infobox"
             android:layout_width="0dp"
@@ -198,23 +160,13 @@
                     android:animateLayoutChanges="true"
                     android:layout_margin="20dp">
 
-                <Button
-                        android:text="Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/testBtt"
-                        android:layout_weight="1"
-                        android:layout_marginHorizontal="20dp"
-                        tools:visibility="gone"
-                        android:visibility="gone" />
-
                 <Space
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 <Button
                         android:text="@string/startgame"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/startMainGame"
                         android:layerType="hardware"
