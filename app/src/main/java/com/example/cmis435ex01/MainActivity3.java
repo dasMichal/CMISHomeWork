@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Parcelable;
 import android.view.Gravity;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -47,7 +48,7 @@ public class MainActivity3 extends AppCompatActivity {
     TextView secLeft;
     TextView hinttxt;
     TextView scoretxt;
-    AlertDialog dialog;
+    Button endGame;
     public CountDownTimer counter;
     TableRow tr;
     Random r = new Random();
@@ -92,22 +93,8 @@ public class MainActivity3 extends AppCompatActivity {
         secLeft = findViewById(R.id.secleft);
         hinttxt = findViewById(R.id.hinttxt);
         scoretxt = findViewById(R.id.score);
-
-
-        //Tried doing an alert. Didn't get it to work
-        /*
-        MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder((card1text.getContext()));
-        materialAlertDialogBuilder.setTitle(getResources().getString(R.string.app_name));
-        materialAlertDialogBuilder.setMessage(getResources().getString(R.string.app_name));
-
-        materialAlertDialogBuilder.setNeutralButton(resources.getString(R.string.cancel))
-        {
-            System.out.println("TEST");
-             // Respond to neutral button press
-        }
-        dialog = materialAlertDialogBuilder.show();
-
-        */
+        endGame = findViewById(R.id.endGame);
+        endGame.setOnClickListener(v -> endGame(usrName,scoreArray,score));
 
         String text1 = getString(R.string.Score,0);
         scoretxt.setText(" "+text1);
