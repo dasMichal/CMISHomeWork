@@ -122,7 +122,7 @@ public class MainActivity3 extends AppCompatActivity {
 
         // Create random numbers and add them to List
 
-        boolean notInList = false;
+        boolean notInList;
         ranNumbers.clear();
 
         for (int i = 0; i < numberFields; i++)
@@ -134,14 +134,10 @@ public class MainActivity3 extends AppCompatActivity {
 
                 int tmp = randomNumber();
 
-                long count = ranNumbers.stream().filter(ranNumbers -> Objects.equals(tmp, ranNumbers)).count();
+                long count = ranNumbers.stream().filter(ranNumbers -> Objects.equals(tmp, ranNumbers)).count(); //Using Java Stream to get how often tmp occurs in ranNumbers.
                 System.out.println("Loopcount "+i+"| "+tmp+" occures "+count);
 
-                if (count == 0)
-                {
-                    notInList= true;
-
-                }else  notInList= false;
+                notInList = count == 0;         //notInList  is true if count equals 0
 
                 ranNumbers.add(tmp);
 
@@ -165,16 +161,16 @@ public class MainActivity3 extends AppCompatActivity {
         System.out.print("Map ");
         System.out.println(counts);
 
-
         System.out.println("Keys ");
-        counts.forEach((k, v) -> {
-            System.out.println("Key: " + k + ", Value: " + v);
-        });
+        counts.forEach((k, v) -> System.out.println("Key: " + k + ", Value: " + v));
+
 
 
 
         System.out.println(" ");
-        average = ranNumbers.stream().mapToInt(Integer::intValue).sum();
+
+
+        average = ranNumbers.stream().mapToInt(Integer::intValue).sum();  //Using Java Stream to add all numbers from ranNumbers
         System.out.println("Sum "+average);
         average = average/numberFields;
         System.out.println("Average "+average);
