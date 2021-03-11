@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"DynamicNumGuessGame "</string>
+    <string name="task_name">Wählen Sie die Zahl, die dem Durchschnitt am nächsten kommt</string>
+    <string name="Score">Punkte: %1$d</string>
+    <string name="time">Sie haben %1$d Sekunden Zeit</string>
+    <string name="hint">Tipp! Der Durchschnitt lautet %1$f</string>
+    <string name="settingText">"Spiele Einstellungen "</string>
+    <string name="numbrSliderText">Sie haben %1$d  Zahlen ausgewählt</string>
+    <string name="placeholderInputName">Geben Sie ihren Namen ein</string>
+    <string name="nameEmptyError">Das Feld darf nicht leer sein</string>
+    <string name="startgame">Spiel starten</string>
+    <string name="numOfNumbers">Anzahl der Zufallszahlen</string>
+    <string name="rangeOfRandom">"Bereich von Zufallszahlen "</string>
+    <string name="rangeOfRandomValue">"Von %1$d bis %2$d "</string>
+    <string name="endButton">Spiel beenden</string>
+    <string name="ScoreTitle">Punkte</string>
+    <string name="totalScore">Gesamtpunktzahl</string>
+    <string name="CorrectTextField">"Richtig "</string>
+    <string name="NegativeTextField">Falsch</string>
+    <string name="ScorePlayerName">Spieler %1$s</string>
+    <string name="strgfailed">Zu Langsam</string>
+
+
+
+    <plurals name="pointsPlural">
+
+
+        <item quantity="one">%1$d Punkt</item>
+        <item quantity="other"> %1$d Punkte</item>
+    </plurals>
+
+
+    <plurals name="totalScorePlural">
+
+
+        <item quantity="one">%1$d Punkt</item>
+        <item quantity="other"> %1$d Punkte</item>
+    </plurals>
+
+
+
+
+    <plurals name="timePlural">
+
+
+        <item quantity="one">Sie haben noch %1$d Sekunde Zeit</item>
+        <item quantity="other">Sie haben noch %1$d Sekunden Zeit</item>
+    </plurals>
+    <string name="newgame">Neues Spiel</string>
+    <string name="yes">Ja</string>
+    <string name="dialogerror">Fehler</string>
+    <string name="newgamedialog">Neues Spiel Starten?</string>
+    <string name="dialogranError">"Der Zufallszahlenbereich kann nicht gleich 0 sein "</string>
+</resources>

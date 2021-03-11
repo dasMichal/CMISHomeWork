@@ -1,58 +1,70 @@
 package com.example.cmis435ex01;
 
-import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelStore;
+import androidx.cardview.widget.CardView;
 
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainActivity3 extends AppCompatActivity {
 
     // All Variables in Global use
     double average;
-    final int[] array = new int[4];
     private int score = 0;
     static final int duration = 20000;
+    int numberFields;
+    String usrName;
+    List<Integer> ranNumbers = new ArrayList<>();
+    float[] randomNumberRange = new float[2];
+    int[]  scoreArray = new int[2];
 
-    AlertDialog dialog;
 
     // Declare all the Objects
     ProgressBar progressBar;
     TextView secLeft;
     TextView hinttxt;
     TextView scoretxt;
-    TextView card1text;
-    TextView card2text;
-    TextView card3text;
-    TextView card4text;
-    MaterialCardView card1;
-    MaterialCardView card2;
-    MaterialCardView card3;
-    MaterialCardView card4;
+    Button endGame;
     public CountDownTimer counter;
+    TableRow tr;
+    final Random r = new Random();
+
+
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        init();
 
-        roll();
+        //Receive the Intents from previous Activity
+        Intent in = getIntent();
+        usrName = in.getStringExtra("usrName");
+        numberFields = in.getIntExtra("numberFields",4);
+        randomNumberRange = in.getFloatArrayExtra("RandomBound");
+
+
+        init();
+        roll2();
     }
 
 
@@ -65,77 +77,97 @@ public class MainActivity3 extends AppCompatActivity {
     private void init()         //Assign all the Objects in one Place
     {
 
+
         progressBar = findViewById(R.id.progressBar2);
         secLeft = findViewById(R.id.secleft);
         hinttxt = findViewById(R.id.hinttxt);
         scoretxt = findViewById(R.id.score);
+        endGame = findViewById(R.id.endGame);
+        endGame.setOnClickListener(v -> endGame(usrName,scoreArray,score));
 
-
-        //Creating the Material Cards
-        card1 = findViewById(R.id.card1);
-        card1text = findViewById(R.id.card1text);
-
-        card2 = findViewById(R.id.card2);
-        card2text = findViewById(R.id.card2text);
-
-        card3 = findViewById(R.id.card3);
-        card3text = findViewById(R.id.card3text);
-
-        card4 = findViewById(R.id.card4);
-        card4text = findViewById(R.id.card4text);
-
-        //Tried doing an alert. Didn't get it to work
-        /*
-        MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder((card1text.getContext()));
-        materialAlertDialogBuilder.setTitle(getResources().getString(R.string.app_name));
-        materialAlertDialogBuilder.setMessage(getResources().getString(R.string.app_name));
-
-        materialAlertDialogBuilder.setNeutralButton(resources.getString(R.string.cancel))
-        {
-            System.out.println("TEST");
-             // Respond to neutral button press
-        }
-        dialog = materialAlertDialogBuilder.show();
-
-        */
         String text1 = getString(R.string.Score,0);
         scoretxt.setText(" "+text1);
         hinttxt.setText(" ");
 
     }
 
-    private void roll() {
+
+    public int randomNumber()
+    {
+
+        System.out.println(randomNumberRange[0]);
+        System.out.println(randomNumberRange[1]);
+        int low = (int) randomNumberRange[0];
+        int high = (int) randomNumberRange[1];
+        high = high+1;
+        //int result = r.nextInt(high-low) + low;
+
+        //return r.nextInt(9);
+        return r.nextInt(high-low) + low;
+    }
+
+    private void roll2() {
 
 
-        Random r = new Random();
+        // Create random numbers and add them to List
 
-        // Create random numbers and Sae them to array
-        for (int i = 0; i < array.length; i++) {
-            array[i] = r.nextInt(9);
-            System.out.println(i);
-            System.out.println(array[i]);
+        boolean notInList;
+        ranNumbers.clear();
+
+        for (int i = 0; i < numberFields; i++)
+        {
+
+
+            do
+            {
+
+                int tmp = randomNumber();
+
+                long count = ranNumbers.stream().filter(ranNumbers -> Objects.equals(tmp, ranNumbers)).count(); //Using Java Stream to get how often tmp occurs in ranNumbers.
+                System.out.println("Loopcount "+i+"| "+tmp+" occures "+count);
+
+                notInList = count == 0;         //notInList  is true if count equals 0
+
+                ranNumbers.add(tmp);
+
+
+
+
+
+            }while(!notInList);
+
+
+
+
+
+
+            //System.out.print(ranNumbers.get(i)+",");
+
         }
 
-        // calculate average of the numbers
-        average = (array[0] + array[1] + array[2] + array[3]);
-        average = average / 4;
+        Map<Integer, Long> counts = ranNumbers.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        System.out.println(" ");
+        System.out.print("Map ");
+        System.out.println(counts);
 
-        card1.setTag(array[0]); // Setting the Object tag with its value to be able to retrieve it later
-        card1text.setText(" " + array[0]);
-        card1.setOnClickListener(v -> compare(array, average, (Integer) card1.getTag()));
+        System.out.println("Keys ");
+        counts.forEach((k, v) -> System.out.println("Key: " + k + ", Value: " + v));
 
-        card2.setTag(array[1]);
-        card2text.setText(" " + array[1]);
-        card2.setOnClickListener(v -> compare(array, average, (Integer) card2.getTag()));
 
-        card3.setTag(array[2]);
-        card3text.setText(" " + array[2]);
-        card3.setOnClickListener(v -> compare(array, average, (Integer) card3.getTag()));
 
-        card4.setTag(array[3]);
-        card4text.setText(" " + array[3]);
-        card4.setOnClickListener(v -> compare(array, average, (Integer) card4.getTag()));
 
+        System.out.println(" ");
+
+
+        average = ranNumbers.stream().mapToInt(Integer::intValue).sum();  //Using Java Stream to add all numbers from ranNumbers
+        System.out.println("Sum "+average);
+        average = average/numberFields;
+        System.out.println("Average "+average);
+        //System.out.println(ranNumbers.size());
+
+
+
+        createGameField(ranNumbers,numberFields,average);
         hinttxt.setText(" ");
         progressBar.setMax(duration / 1000); // Setting Progressbar length according to the Time duration
         progressBar.setProgress(0); // Resetting Progressbar
@@ -147,20 +179,19 @@ public class MainActivity3 extends AppCompatActivity {
 
 
 
+
     /**
-     * @param array    Array with the random numbers
+     * @param ranNumbers    List with the random numbers
      * @param average  Average of the numbers from the Array
      * @param inputVal Value the User had selected
      */
-    private void compare(int[] array, double average, int inputVal) {
+    private void compare2(List<Integer> ranNumbers, double average, int inputVal) {
 
-        System.out.println(progressBar.getProgress());
+
         int closest = 0;
         double diff;
-        Arrays.sort(array);
-        System.out.println(Arrays.toString(array));
 
-        for (int value : array) {
+        for (int value : ranNumbers) {
             // System.out.print(array[i]+", ");
             diff = Math.abs(average - value);
 
@@ -180,6 +211,73 @@ public class MainActivity3 extends AppCompatActivity {
     }
 
     /**
+     * @param ranNumbers    List with the random numbers
+     * @param numberFields  Amount of Numbers the User Selected
+     * @param average The Calculated average from the Random Numbers
+     */
+    private void createGameField(List<Integer> ranNumbers, int numberFields, double average)
+    {
+
+        //Setting Layouts for Tables and Rows
+
+        TableLayout TableGameField = findViewById(R.id.TableGameField);
+
+        TableGameField.removeAllViews();
+        TableGameField.setPadding(0,10,0,10);
+
+        TableLayout.LayoutParams TableLayout = new TableLayout.LayoutParams(android.widget.TableLayout.LayoutParams.MATCH_PARENT, android.widget.TableLayout.LayoutParams.MATCH_PARENT);
+        TableLayout.weight = 1;
+
+        TableRow.LayoutParams RowLayout = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        RowLayout.weight = 1;
+        RowLayout.gravity= Gravity.CENTER;
+        RowLayout.setMargins(10,20 ,10,20);
+
+
+
+
+
+        for (int i = 0; i < numberFields; i++) //Check if no more that two cards in each Row
+        {
+            if (i % 2 == 0)         //Else create new Row
+            {
+                tr = new TableRow(this);
+                tr.setLayoutParams(TableLayout);
+                TableGameField.addView(tr);
+            }
+
+
+            CardView playCard = new CardView(this); //Create new CardView
+            TextView playCardText = new TextView(this); //Create corresponding new TextView
+
+
+            playCardText.setText(" "+ranNumbers.get(i));
+            playCardText.setGravity(Gravity.CENTER);
+            playCardText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+
+
+            playCard.setMinimumWidth((int) dptopx(100));
+            playCard.setMinimumHeight((int) dptopx(80));
+            playCard.setContentPadding((int) dptopx(10),(int) dptopx(10),(int) dptopx(10),(int) dptopx(10));
+
+
+            playCard.setId(i);
+            playCard.setTag(ranNumbers.get(i)); //Setting the Value the Card has as its Tag to easily extract it later
+            playCard.setElevation((int) dptopx(2));
+            playCard.addView(playCardText);     //Add TextView to the CardView so the Text stays with the Card
+            playCard.setLayoutParams(RowLayout);    //Applies the RowLayout parameters to the cardView
+
+            playCard.setOnClickListener(v -> compare2(ranNumbers, average, (Integer) playCard.getTag())); //Attaches a onClick to each CardView
+            tr.addView(playCard);   //Adds the CardView with its TextView to the Table Row
+
+        }
+    }
+
+
+
+
+
+    /**
      * @param selectedVal Value the User had selected
      * @param closest     Closest number to average from number set in Array passed
      *                    from previous function
@@ -188,11 +286,13 @@ public class MainActivity3 extends AppCompatActivity {
 
         if (selectedVal == closest) {
             score++;
+            scoreArray[0]= scoreArray[0] +1;
             Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
             hinttxt.setText(" ");
 
         } else {
             score--;
+            scoreArray[1]= scoreArray[1] +1;
             Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
         }
         counter.cancel();
@@ -200,10 +300,12 @@ public class MainActivity3 extends AppCompatActivity {
         String text1 = getString(R.string.Score, score);
         scoretxt.setText(text1);
 
-        roll();
+        roll2();
     }
 
-
+    /**
+     * Function with the Countdown Timer
+     */
     public void progress3() {
 
         counter = new CountDownTimer(duration, 1000) {
@@ -215,7 +317,10 @@ public class MainActivity3 extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 progressStatus++;
                 // secLeft.setText("seconds remaining: " + millisUntilFinished / 1000);
-                secLeft.setText(getString(R.string.time, (millisUntilFinished / 1000)));
+                //secLeft.setText(getString(R.string.time, (millisUntilFinished / 1000)));
+
+
+                secLeft.setText(getResources().getQuantityString(R.plurals.timePlural, (int) (millisUntilFinished / 1000), (int) (millisUntilFinished / 1000)));
                 if (progressStatus == half) {
 
                     String text1 = getString(R.string.hint, average);
@@ -232,6 +337,7 @@ public class MainActivity3 extends AppCompatActivity {
                 progressBar.setProgress(0);
                 progressStatus = 0;
                 score--;
+                scoreArray[1]= scoreArray[1] +1;
                 //hinttxt.setText(getResources().getString(R.string.strgfailed));
 
                 String text1 = getString(R.string.Score, score);
@@ -239,12 +345,55 @@ public class MainActivity3 extends AppCompatActivity {
                 secLeft.setText(" ");
                 hinttxt.setText(" ");
 
-                roll();
+                roll2();
             }
 
         };
 
     }
+
+    /**
+     *
+     * @param usrName   Player Name
+     * @param scoreArray    Array with the Points
+     * @param totalScore    Totale Score of Game
+     */
+    private void endGame(String usrName, int[] scoreArray, int totalScore)
+    {
+
+
+
+        Intent intent = new Intent(MainActivity3.this, ScoreboardActivity.class);
+
+
+        //intent.putExtra("RandomBound",rangeArray);
+
+        //Sending the username and score to endActivity
+        intent.putExtra("usrName",usrName);
+        intent.putExtra("scoreArray",scoreArray);
+        intent.putExtra("totalScore",totalScore);
+
+
+        startActivity(intent);
+
+
+    }
+
+
+
+
+
+
+    /**
+     *
+     * @param dp Pixel Value to convert it to dp
+     * @return  Returns the Value
+     */
+    public float dptopx(float dp)
+    {
+        return dp * getResources().getDisplayMetrics().density;
+    }
+
 
 
 }

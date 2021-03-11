@@ -9,72 +9,87 @@
         android:hapticFeedbackEnabled="false"
         android:layerType="hardware">
 
+    <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/TableGameField"
+            android:paddingVertical="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/infobox"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="0.0" />
+
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card2"
-        android:layout_width="150dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="24dp"
-        app:cardBackgroundColor="?attr/cardBackgroundColor"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/card2"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="24dp"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="5dp"
+            app:contentPadding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone">
 
         <TextView
-            android:id="@+id/card2text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="30sp" />
+                android:id="@+id/card2text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="30sp" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card4"
-        android:layout_width="150dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="340dp"
-        app:cardBackgroundColor="?attr/cardBackgroundColor"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            android:id="@+id/card4"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="340dp"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="5dp"
+            app:contentPadding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone">
 
         <TextView
-            android:id="@+id/card4text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="30sp" />
+                android:id="@+id/card4text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="30sp" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card3"
-        android:layout_width="150dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="340dp"
-        app:cardBackgroundColor="?attr/cardBackgroundColor"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+            android:id="@+id/card3"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="340dp"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="5dp"
+            app:contentPadding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone">
 
         <TextView
-            android:id="@+id/card3text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="30sp" />
+                android:id="@+id/card3text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="30sp" />
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -93,7 +108,8 @@
             app:cardUseCompatPadding="false"
             app:contentPadding="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone">
 
         <TextView
                 android:id="@+id/card1text"
@@ -110,7 +126,7 @@
     <com.google.android.material.card.MaterialCardView
             android:id="@+id/infobox"
             android:layout_width="390dp"
-            android:layout_height="299dp"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:contextClickable="true"
             android:textAlignment="center"
@@ -123,9 +139,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:cardMaxElevation="10dp">
+            app:cardMaxElevation="10dp"
+            app:layout_constraintTop_toBottomOf="@id/TableGameField">
 
 
         <LinearLayout
@@ -196,7 +211,15 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="30sp"
                     tools:layout_editor_absoluteY="568dp"
-                    tools:layout_editor_absoluteX="11dp" />
+                    tools:layout_editor_absoluteX="11dp"
+                    android:layout_marginBottom="20dp" />
+
+            <Button
+                    android:text="@string/endButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endGame"
+                    android:layout_weight="1" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
