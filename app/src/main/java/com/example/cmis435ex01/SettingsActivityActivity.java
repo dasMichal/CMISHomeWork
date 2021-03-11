@@ -22,7 +22,7 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 	// All Variables in Global use
 	List<Float> rangeArray = new ArrayList<>();
-	float[] randomNumberRange = new float[2];
+	final float[] randomNumberRange = new float[2];
 
 
 	// Declare all the Objects
@@ -89,6 +89,8 @@ public class SettingsActivityActivity extends AppCompatActivity
 	private void logic()
 	{
 
+
+		//On Change Listener which executes each time the Slider has been moved
 		numbrSlider.addOnChangeListener((slider, value, fromUser) ->
 		{
 
@@ -99,7 +101,7 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 		});
 
-
+		//On Change Listener which executes each time the Slider has been moved
 		randomNumberBoundSlider.addOnChangeListener((slider, value, fromUser) ->
 		{
 			rangeArray = slider.getValues();
@@ -120,6 +122,7 @@ public class SettingsActivityActivity extends AppCompatActivity
 		startMainGame.setOnClickListener(v ->
 		{
 
+			//Check if Username Field is Empty
 			if(TextUtils.isEmpty(userNameInput.getText()))
 			{
 				String text1 = getString(R.string.nameEmptyError);
