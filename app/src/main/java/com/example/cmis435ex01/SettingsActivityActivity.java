@@ -56,12 +56,20 @@ public class SettingsActivityActivity extends AppCompatActivity
 	{
 
 		numbrSlider = findViewById(R.id.numbrSlider);
-		numbrSlider.setValue(4);
+		numbrSlider.setValue(4); //Set The Slider to its default Values
 
+
+		numbrSliderText = findViewById(R.id.numbrSliderText);
+		numbrSliderText.setText(getResources().getString(R.string.numOfNumbersValue,(int) numbrSlider.getValue()));
 
 
 		randomNumberBoundSlider = findViewById(R.id.randomNumberBoundSlider);
-		numbrSliderText = findViewById(R.id.numbrSliderText);
+		randomNumberBoundSlider.setStepSize((float) 1.0);    //Set The Range Slider step Size
+		randomNumberBoundSlider.setValues((float) 1.0, (float) 10.0); //Set The Range Slider to its default Values
+
+
+		randomNumberBoundText = findViewById(R.id.randomNumberBoundText);
+		randomNumberBoundText.setText(getResources().getString(R.string.rangeOfRandomValue,randomNumberBoundSlider.getValues().get(0).intValue(),randomNumberBoundSlider.getValues().get(1).intValue()));
 
 
 		settingText = findViewById(R.id.settingText);
@@ -84,11 +92,8 @@ public class SettingsActivityActivity extends AppCompatActivity
 		{
 
 			System.out.println("NumberSlider= "+value);
-			String text1 = getString(R.string.numbrSliderText, (int) value);
-			numbrSliderText.setText(text1);
-			//testLayout();
-			//System.out.println(userNameInput.getText());
 
+			numbrSliderText.setText(getResources().getString(R.string.numOfNumbersValue,(int) value)); //Print the new value of the Slider
 
 
 		});
@@ -97,14 +102,11 @@ public class SettingsActivityActivity extends AppCompatActivity
 		randomNumberBoundSlider.addOnChangeListener((slider, value, fromUser) ->
 		{
 			rangeArray = slider.getValues();
+
 			randomNumberRange[0]= rangeArray.get(0);
 			randomNumberRange[1]= rangeArray.get(1);
 
-
-
-			//String text1 = getString(R.string.numbrSliderText, value);
-			//numbrSliderText.setText(text1);
-
+			randomNumberBoundText.setText(getResources().getString(R.string.rangeOfRandomValue,(int) randomNumberRange[0],(int) randomNumberRange[1]));
 
 		});
 
