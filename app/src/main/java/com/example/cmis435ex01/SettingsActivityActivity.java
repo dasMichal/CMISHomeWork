@@ -99,6 +99,10 @@ public class SettingsActivityActivity extends AppCompatActivity
 			numbrSliderText.setText(getResources().getString(R.string.numOfNumbersValue,(int) value)); //Print the new value of the Slider
 
 
+			checkBound();
+
+
+
 		});
 
 		//On Change Listener which executes each time the Slider has been moved
@@ -108,6 +112,9 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 			randomNumberRange[0]= rangeArray.get(0);
 			randomNumberRange[1]= rangeArray.get(1);
+
+			checkBound();
+
 
 			randomNumberBoundText.setText(getResources().getString(R.string.rangeOfRandomValue,(int) randomNumberRange[0],(int) randomNumberRange[1]));
 
@@ -173,6 +180,60 @@ public class SettingsActivityActivity extends AppCompatActivity
 
 
 
+	public void checkBound()
+	{
+
+		//Checking if Random Number Bound is than amount of numbers
+
+		randomNumberRange[0]= randomNumberBoundSlider.getValues().get(0);
+		randomNumberRange[1]= randomNumberBoundSlider.getValues().get(1);
+
+		System.out.println((randomNumberRange[1]-randomNumberRange[0])+1);
+
+
+		int range = (int) ((randomNumberRange[1]-randomNumberRange[0])+1);
+		int space = (int) (numbrSlider.getValue() -range); // how much distance has to be added
+
+
+		if (range < (int) numbrSlider.getValue())
+		{
+
+
+			if(randomNumberBoundSlider.getValues().get(0) > randomNumberBoundSlider.getValueFrom() )
+			{
+				int tmp = (int) (randomNumberBoundSlider.getValues().get(0) - randomNumberBoundSlider.getValueFrom());
+				System.out.println("How much left can i go: "+tmp);
+				if (tmp >= space )
+				{
+
+					randomNumberBoundSlider.setValues(randomNumberBoundSlider.getValues().get(0)-space, randomNumberBoundSlider.getValues().get(1));
+
+				}
+
+				//slider.setValues((float) 1.0, (float) 10.0);;
+			}
+
+
+			if(randomNumberBoundSlider.getValues().get(1) < randomNumberBoundSlider.getValueTo())
+			{
+				int tmp = (int) (randomNumberBoundSlider.getValueTo() - randomNumberBoundSlider.getValues().get(1));
+				System.out.println("How much right can i go: "+tmp);
+				if (tmp >= space )
+				{
+
+					randomNumberBoundSlider.setValues(randomNumberBoundSlider.getValues().get(0), randomNumberBoundSlider.getValues().get(1)+space);
+
+				}
+
+			}
+
+
+
+		}
+
+
+
+	}
 
 
 
