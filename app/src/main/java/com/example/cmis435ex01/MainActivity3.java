@@ -17,18 +17,22 @@ import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class MainActivity3 extends AppCompatActivity {
 
+    static final int duration = 20000;
+    private int score = 0;
+
+
     // All Variables in Global use
     double average;
-    private int score = 0;
-    static final int duration = 20000;
     int numberFields;
+    int totaleTime;
+    long timeleft;
+    long timeStart;
+    long timeEnd;
     String usrName;
     List<Integer> ranNumbers = new ArrayList<>();
     float[] randomNumberRange = new float[2];
@@ -45,16 +49,12 @@ public class MainActivity3 extends AppCompatActivity {
     TableRow tr;
     final Random r = new Random();
 
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+
+        timeStart= System.currentTimeMillis();  //Save current Time in Mills
 
         //Receive the Intents from previous Activity
         Intent in = getIntent();
@@ -95,8 +95,8 @@ public class MainActivity3 extends AppCompatActivity {
     public int randomNumber()
     {
 
-        System.out.println(randomNumberRange[0]);
-        System.out.println(randomNumberRange[1]);
+        //System.out.println(randomNumberRange[0]);
+        //System.out.println(randomNumberRange[1]);
         int low = (int) randomNumberRange[0];
         int high = (int) randomNumberRange[1];
         high = high+1;
@@ -124,7 +124,7 @@ public class MainActivity3 extends AppCompatActivity {
                 int tmp = randomNumber();
 
                 long count = ranNumbers.stream().filter(ranNumbers -> Objects.equals(tmp, ranNumbers)).count(); //Using Java Stream to get how often tmp occurs in ranNumbers.
-                System.out.println("Loopcount "+i+"| "+tmp+" occures "+count);
+                //System.out.println("Loopcount "+i+"| "+tmp+" occures "+count);
 
                 notInList = count == 0;         //notInList  is true if count equals 0
 
@@ -145,6 +145,7 @@ public class MainActivity3 extends AppCompatActivity {
 
         }
 
+        /*
         Map<Integer, Long> counts = ranNumbers.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
         System.out.println(" ");
         System.out.print("Map ");
@@ -152,19 +153,17 @@ public class MainActivity3 extends AppCompatActivity {
 
         System.out.println("Keys ");
         counts.forEach((k, v) -> System.out.println("Key: " + k + ", Value: " + v));
-
-
-
-
         System.out.println(" ");
+
+         */
+
 
 
         average = ranNumbers.stream().mapToInt(Integer::intValue).sum();  //Using Java Stream to add all numbers from ranNumbers
-        System.out.println("Sum "+average);
+        //System.out.println("Sum "+average);
         average = average/numberFields;
-        System.out.println("Average "+average);
+        //System.out.println("Average "+average);
         //System.out.println(ranNumbers.size());
-
 
 
         createGameField(ranNumbers,numberFields,average);
@@ -290,9 +289,26 @@ public class MainActivity3 extends AppCompatActivity {
             Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
             hinttxt.setText(" ");
 
+            //totaleTime += (duration/1000) - (int) timeleft;
+            //totaleTime += duration - (int) timeleft;
+
+            //System.out.println("TOTALE TIME: "+totaleTime);
+            //System.out.println((new SimpleDateFormat("mm:ss:SS")).format(new Date(totaleTime)));
+
+
         } else {
             score--;
             scoreArray[1]= scoreArray[1] +1;
+
+            //totaleTime += (duration/1000) - (int) timeleft;
+
+            //totaleTime += duration - (int) timeleft;
+
+            //System.out.println("TOTALE TIME: "+totaleTime);
+            //System.out.println((new SimpleDateFormat("mm:ss:SS")).format(new Date(totaleTime)));
+
+
+
             Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
         }
         counter.cancel();
@@ -309,13 +325,15 @@ public class MainActivity3 extends AppCompatActivity {
     public void progress3() {
 
         counter = new CountDownTimer(duration, 1000) {
-            int progressStatus = 0;
-
             final int half = ((duration / 2) / 1000);
+            int progressStatus = 0;
 
             @Override
             public void onTick(long millisUntilFinished) {
                 progressStatus++;
+
+                //timeleft = (millisUntilFinished / 1000);
+                //timeleft = millisUntilFinished;
                 // secLeft.setText("seconds remaining: " + millisUntilFinished / 1000);
                 //secLeft.setText(getString(R.string.time, (millisUntilFinished / 1000)));
 
@@ -340,6 +358,13 @@ public class MainActivity3 extends AppCompatActivity {
                 scoreArray[1]= scoreArray[1] +1;
                 //hinttxt.setText(getResources().getString(R.string.strgfailed));
 
+
+                //totaleTime += (duration/1000) - (int) timeleft;
+                //totaleTime += duration - (int) timeleft;
+                //System.out.println("TOTALE TIME: "+totaleTime);
+                //System.out.println((new SimpleDateFormat("mm:ss:SS")).format(new Date(totaleTime)));
+
+
                 String text1 = getString(R.string.Score, score);
                 scoretxt.setText(text1);
                 secLeft.setText(" ");
@@ -361,20 +386,31 @@ public class MainActivity3 extends AppCompatActivity {
     private void endGame(String usrName, int[] scoreArray, int totalScore)
     {
 
+        timeEnd = System.currentTimeMillis();
+
+        long playTime = timeEnd - timeStart;
+        //System.out.println("START: "+timeStart);
+        //System.out.println("End: "+timeEnd);
+        //System.out.println(playTime);
 
 
+        counter.cancel(); // BUG FIXED TODO  Stop Timer when other activity is running
         Intent intent = new Intent(MainActivity3.this, ScoreboardActivity.class);
 
 
-        //intent.putExtra("RandomBound",rangeArray);
 
         //Sending the username and score to endActivity
         intent.putExtra("usrName",usrName);
         intent.putExtra("scoreArray",scoreArray);
         intent.putExtra("totalScore",totalScore);
+        intent.putExtra("totalTime",playTime);
+
+        //System.out.println( new SimpleDateFormat("mm:ss:SS", Locale.getDefault()).format(new Date(playTime)));
+
 
 
         startActivity(intent);
+        finish();
 
 
     }

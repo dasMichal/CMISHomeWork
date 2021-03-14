@@ -53,4 +53,5 @@
     <string name="newgamedialog">Neues Spiel Starten?</string>
     <string name="dialogranError">"Der Zufallszahlenbereich kann nicht gleich 0 sein "</string>
     <string name="next_try">Fortfahren</string>
+    <string name="totalPlaytime">Gesamtspielzeit</string>
 </resources>
