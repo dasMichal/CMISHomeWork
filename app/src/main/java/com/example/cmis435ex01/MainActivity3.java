@@ -19,9 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class MainActivity3 extends AppCompatActivity {
+
+    static final int duration = 20000;
+    private int score = 0;
+
 
     // All Variables in Global use
     double average;
@@ -45,12 +48,6 @@ public class MainActivity3 extends AppCompatActivity {
     public CountDownTimer counter;
     TableRow tr;
     final Random r = new Random();
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,9 +325,8 @@ public class MainActivity3 extends AppCompatActivity {
     public void progress3() {
 
         counter = new CountDownTimer(duration, 1000) {
-            int progressStatus = 0;
-
             final int half = ((duration / 2) / 1000);
+            int progressStatus = 0;
 
             @Override
             public void onTick(long millisUntilFinished) {
