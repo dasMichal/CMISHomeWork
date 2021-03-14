@@ -17,7 +17,6 @@ import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -26,9 +25,11 @@ public class MainActivity3 extends AppCompatActivity {
 
     // All Variables in Global use
     double average;
-    private int score = 0;
-    static final int duration = 20000;
     int numberFields;
+    int totaleTime;
+    long timeleft;
+    long timeStart;
+    long timeEnd;
     String usrName;
     List<Integer> ranNumbers = new ArrayList<>();
     float[] randomNumberRange = new float[2];
@@ -55,6 +56,8 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+
+        timeStart= System.currentTimeMillis();  //Save current Time in Mills
 
         //Receive the Intents from previous Activity
         Intent in = getIntent();
@@ -361,17 +364,27 @@ public class MainActivity3 extends AppCompatActivity {
     private void endGame(String usrName, int[] scoreArray, int totalScore)
     {
 
+        timeEnd = System.currentTimeMillis();
+
+        long playTime = timeEnd - timeStart;
+        //System.out.println("START: "+timeStart);
+        //System.out.println("End: "+timeEnd);
+        //System.out.println(playTime);
 
 
+        counter.cancel(); // BUG FIXED TODO  Stop Timer when other activity is running
         Intent intent = new Intent(MainActivity3.this, ScoreboardActivity.class);
 
 
-        //intent.putExtra("RandomBound",rangeArray);
 
         //Sending the username and score to endActivity
         intent.putExtra("usrName",usrName);
         intent.putExtra("scoreArray",scoreArray);
         intent.putExtra("totalScore",totalScore);
+        intent.putExtra("totalTime",playTime);
+
+        //System.out.println( new SimpleDateFormat("mm:ss:SS", Locale.getDefault()).format(new Date(playTime)));
+
 
 
         startActivity(intent);
