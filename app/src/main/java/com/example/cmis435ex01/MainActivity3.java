@@ -410,6 +410,7 @@ public class MainActivity3 extends AppCompatActivity {
 
 
         startActivity(intent);
+        finish();
 
 
     }
