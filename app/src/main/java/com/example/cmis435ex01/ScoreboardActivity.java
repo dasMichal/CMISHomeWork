@@ -1,14 +1,17 @@
 package com.example.cmis435ex01;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ScoreboardActivity extends AppCompatActivity
 {
@@ -16,12 +19,14 @@ public class ScoreboardActivity extends AppCompatActivity
 	String usrName;
 	int[]  scoreArray = new int[2];
 	int totalScore;
+	long totalTime;
 
 
 	TextView PosScore;
 	TextView NegScore;
 	TextView totalScoreText;
 	TextView Playername;
+	TextView playTimeValue;
 	ExtendedFloatingActionButton efab;
 
 	@Override
@@ -34,6 +39,7 @@ public class ScoreboardActivity extends AppCompatActivity
 		usrName = in.getStringExtra("usrName");
 		scoreArray = in.getIntArrayExtra("scoreArray");
 		totalScore = in.getIntExtra("totalScore",0);
+		totalTime = in.getLongExtra("totalTime",0);
 
 		init();
 		logic();
@@ -46,6 +52,7 @@ public class ScoreboardActivity extends AppCompatActivity
 		NegScore = findViewById(R.id.NegScore);
 		totalScoreText = findViewById(R.id.totalScoreValue);
 		Playername = findViewById(R.id.ScorePlayerName);
+		playTimeValue = findViewById(R.id.playTimeValue);
 		efab = findViewById(R.id.eFab);
 
 
@@ -63,6 +70,8 @@ public class ScoreboardActivity extends AppCompatActivity
 		totalScoreText.setText(getResources().getQuantityString(R.plurals.totalScorePlural,Math.abs(totalScore),totalScore ));
 
 		Playername.setText(getResources().getString(R.string.ScorePlayerName,usrName));
+
+		playTimeValue.setText(new SimpleDateFormat("mm:ss:SS", Locale.getDefault()).format(new Date(totalTime))); //parsin mills to display it in the Local format
 
 		efab.setOnClickListener(v ->
 		{
