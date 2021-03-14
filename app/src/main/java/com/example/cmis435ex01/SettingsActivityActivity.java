@@ -159,8 +159,8 @@ public class SettingsActivityActivity extends AppCompatActivity
 				return;
 			}
 
-			System.out.println(randomNumberRange[0]);
-			System.out.println(randomNumberRange[1]);
+			//System.out.println(randomNumberRange[0]);
+			//System.out.println(randomNumberRange[1]);
 
 			String temp= userNameInput.getText().toString();
 			Intent intent = new Intent(SettingsActivityActivity.this, MainActivity3.class);
