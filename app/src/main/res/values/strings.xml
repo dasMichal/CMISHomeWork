@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HW1SznurczakDynamicNumGuessGame </string>
+    <string name="app_name">HW2SznurczakMemoryGame </string>
     <string name="task_name">Select the number closest to the average of numbers</string>
     <string name="Score">Score: %1$d</string>
     <string name="time">You have %1$d seconds left </string>
@@ -10,7 +10,6 @@
     <string name="dialogerror">Error</string>
     <string name="dialogranError">Random Number range cannot equal 0</string>
     <string name="yes">Yes</string>
-
 
 
     <string name="numbrSliderText">You have selected %1$d numbers </string>
@@ -49,7 +48,6 @@
         <item quantity="one">%1$d Point</item>
         <item quantity="other"> %1$d Points</item>
     </plurals>
-
 
 
     <plurals name="timePlural">
