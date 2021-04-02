@@ -9,13 +9,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.CMIS435Ex01">
-        <activity android:name=".ScoreboardActivity" />
-        <activity android:name=".SettingsActivityActivity">
+        <activity android:name=".MemoryMainGame">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+        </activity>
+        <activity android:name=".ScoreboardActivity" />
+        <activity android:name=".SettingsActivityActivity">
         </activity>
         <activity android:name=".MainActivity3" />
     </application>
