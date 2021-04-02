@@ -23,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/cardText"
                 android:layout_gravity="center"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="30sp" />
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
