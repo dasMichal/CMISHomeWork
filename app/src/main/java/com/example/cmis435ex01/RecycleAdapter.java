@@ -14,16 +14,15 @@ import java.util.List;
 
 
 
-interface OnAdapterItemClickListener
-{
-	void onAdapterItemClickListener(int position);
-}
 
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder>
 {
 	private final List<String> data;
 	private final OnItemClickListener listener;
+	private final int selectedPos = RecyclerView.NO_POSITION;
+
+
 
 	public RecycleAdapter(List<String> generateData, OnItemClickListener listener)
 	{
@@ -35,6 +34,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 	{
 		void onItemClick(Integer item);
 
+		void test(CardView memCard, int itemCount, int layoutPosition, ViewHolder viewHolder);
 	}
 
 
@@ -52,10 +52,13 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 	public void onBindViewHolder(RecycleAdapter.ViewHolder holder, int position)
 	{
 		holder.cardText.setText(" "+this.data.get(position));
-
+		holder.cardText.setVisibility(View.INVISIBLE);
 		holder.memCard.setId(this.data.size());
+		holder.memCard.setTag(" "+this.data.get(position));
 
 		holder.bind(data.get(position), listener);
+		//holder.itemView.setSelected(selectedPos == position);
+		holder.memCard.setSelected(selectedPos == position);
 
 	}
 
@@ -91,17 +94,40 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 		public void onClick(View view)
 		{
 
+			System.out.println("cardText.isSelected() = " + cardText.isSelected());
 
-			Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.cardText.getText(), Toast.LENGTH_SHORT).show();
 
-			/*
-			Context context = view.getContext();
+			if (View.VISIBLE == cardText.getVisibility())
+			{
 
-			Intent intent = new Intent(context, ToDoEdit_Create.class);
-			intent.putExtra("toDoTitle",ToDoText.getText());
-			intent.putExtra("toDoID",todo1.getId());
-			context.startActivity(intent);
-			 */
+				//System.out.println("Full Field");
+				//notifyItemChanged(selectedPos);
+				//selectedPos = RecyclerView.NO_POSITION;
+
+
+				cardText.setVisibility(View.INVISIBLE);
+				listener.test(this.memCard,getItemCount(),getLayoutPosition(),this);
+
+			}
+			else
+			{
+				//System.out.println("Empty Field");
+				//selectedPos = getLayoutPosition();
+				//notifyItemChanged(selectedPos);
+
+				cardText.setVisibility(View.VISIBLE);
+				listener.test(this.memCard,getItemCount(),getLayoutPosition(), this);
+
+			}
+
+
+			//System.out.println("cardText.getVisibility() = " + cardText.getVisibility());
+			//notifyItemChanged(selectedPos);
+
+
+			//Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.cardText.getText(), Toast.LENGTH_SHORT).show();
+
+
 
 
 		}
