@@ -138,57 +138,111 @@ public class MemoryMainGame extends AppCompatActivity
 	private void logic(CardView v,TextView text, int itemCount, int layoutPosition, RecycleAdapter.ViewHolder viewHolder)
 	{
 
+		//To use the Default CardView Colour from Theme als colour to symbolize its flipped state
+		TypedArray a = getTheme().obtainStyledAttributes(R.style.Theme_CMIS435Ex01, new int[] { R.attr.cardBackgroundColor });
+		// Get color hex code (eg, #fff)
+		int intColor = a.getColor(0 /* index */, 0 /* defaultVal */);
+		a.recycle();
 
-		if (countFlipped == 0)
+
+		if (countFlipped == 0)  //If first Card was flipped
 		{
 			Log.d("GameLogic","First Card Flip");
+			//Saving the Elements from the Recyclerview
 			firstPos = layoutPosition;
 			firstTag = (String) v.getTag();
 			firstText = text;
 			firstCard = v;
+
+			//Increasing the Counter
 			countFlipped++;
+			flipCounter++;
 
+			firstCard.setCardBackgroundColor(intColor);
+			flipCounterText.setText(getResources().getQuantityString(R.plurals.flipsPlural, (int) flipCounter, (int) flipCounter ));
 
-		}else if (countFlipped == 1)
+		}else if (countFlipped == 1) //If second Card was flipped
 		{
 			Log.d("GameLogic","Second Card Flip");
+			//Saving the Elements from the Recyclerview
 			secondPos = layoutPosition;
 			secondTag = (String) v.getTag();
 			secondText = text;
 			secondCard = v;
+
+			//Increasing the Counter
 			countFlipped++;
+			flipCounter++;
+
+			secondCard.setCardBackgroundColor(intColor);
+			flipCounterText.setText(getResources().getQuantityString(R.plurals.flipsPlural, (int) flipCounter, (int) flipCounter ));
 		}
 
 
-
+		//If two Cards are flipped
 		if(countFlipped == 2)
 		{
 
-			//TODO ADD FLIP COUNTER
+			//To use the Default CardView Colour from Theme als colour to symbolize its flipped state
+
+			//a = getTheme().obtainStyledAttributes(R.style.Theme_CMIS435Ex01, new int[] { R.attr.cardBackgroundColor });
+			// Get color hex code (eg, #fff)
+			//intColor = a.getColor(0 /* index */, 0 /* defaultVal */);
+			//a.recycle();
+
+
+
+
 			//TODO ADD END GAME ACTIVITY
 
-			Log.d("Game Logic","compare(firstTag,secondTag) = " + compare(firstTag, secondTag));
+			Log.d("GameLogic","compare(firstTag,secondTag) = " + compare(firstTag, secondTag));
+			if (!compare(firstTag, secondTag))      //Cards do not Match
+			{
+				wrongflipCounter++;
+				wrongflipCounterText.setText(getResources().getQuantityString(R.plurals.wrongflipsPlural, (int) wrongflipCounter, (int) wrongflipCounter ));
 
 
-			if (compare(firstTag,secondTag))
+				//Set the Card background to Red
+				firstCard.setCardBackgroundColor(getColor(R.color.md_red_800));
+				secondCard.setCardBackgroundColor(getColor(R.color.md_red_800));
+
+				//Create CountdownTimer to "Flip" the wrong Cards back to its initial state
+				progress3(firstText,secondText,firstPos,secondPos, intColor); // Creating a Countdown timer
+				counter.cancel(); // For Safety cancel a possible running countdown Timer
+				counter.start(); // Start a new countdown Timer
+
+
+			} else     //Cards Match
 			{
 
+				//Disables CardView when they match
 				recyclerView.getChildAt(firstPos).setEnabled(false);
 				recyclerView.getChildAt(secondPos).setEnabled(false);
 
+
+				//Setting CardView Background to Green to symbolize that the Cards match
+				// and a successful move was done by the user
 				firstCard.setCardBackgroundColor(getColor(R.color.md_green_400));
 				secondCard.setCardBackgroundColor(getColor(R.color.md_green_400));
 
 
 			}
 
+			//reset countFlipped for the next Card Pair
 			countFlipped = 0;
 		}
 
 	}
 
 
-
+	/**
+	 *
+	 * @param firstText TextView from the first Card that was flipped
+	 * @param secondText TextView from the second Card that was flipped
+	 * @param firstPos  The Position of the first Card in the Recyclerview
+	 * @param secondPos The Position of the second Card in the Recyclerview
+	 * @param defaultColour Default Colour of the CardView from the Theme
+	 */
 	private void progress3(TextView firstText, TextView secondText, int firstPos, int secondPos, int defaultColour )
 	{
 
@@ -205,18 +259,22 @@ public class MemoryMainGame extends AppCompatActivity
 			@Override
 			public void onFinish()
 			{
-
-
+				//After Timer set the Card Background back to Default (Amber)
 				firstText.setVisibility(View.INVISIBLE);
 				secondText.setVisibility(View.INVISIBLE);
-				firstCard.setCardBackgroundColor(defaultColour);
-				secondCard.setCardBackgroundColor(defaultColour);
+				firstCard.setCardBackgroundColor(backFlippedColour);
+				secondCard.setCardBackgroundColor(backFlippedColour);
 
 			}
 		};
 	}
 
-
+	/**
+	 *
+	 * @param tag1 Tag Value from the first Card that was flipped
+	 * @param tag2 Tag Value from the second Card that was flipped
+	 * @return  returns true if Tag equals
+	 */
 	private boolean compare(String tag1,String tag2)
 	{
 		return tag1.equalsIgnoreCase(tag2);
