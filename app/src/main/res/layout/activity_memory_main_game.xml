@@ -26,18 +26,18 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+            android:text="@string/totalScore"
+            android:layout_width="334dp"
+            android:layout_height="91dp"
+            android:id="@+id/totalFlips"
+            android:textSize="30sp"
             app:layout_constraintTop_toBottomOf="@+id/MemoryCardHolder"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintVertical_bias="0.785"
+            android:textAlignment="center" />
 
-        <TextView
-                android:text="@string/totalScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/totalFlips" />
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
