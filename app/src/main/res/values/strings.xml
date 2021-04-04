@@ -1,36 +1,7 @@
 <resources>
     <string name="app_name">HW2SznurczakMemoryGame </string>
-    <string name="task_name">Select the number closest to the average of numbers</string>
-    <string name="Score">Score: %1$d</string>
-    <string name="time">You have %1$d seconds left </string>
-    <string name="hint">HINT! The average is %1$f</string>
-    <string name="next_try">Continue</string>
-    <string name="strgfailed">To Slow.. Try next time </string>
-    <string name="settingText">Game Settings</string>
-    <string name="dialogerror">Error</string>
-    <string name="dialogranError">Random Number range cannot equal 0</string>
     <string name="yes">Yes</string>
-
-
-    <string name="numbrSliderText">You have selected %1$d numbers </string>
-    <string name="placeholderInputName">Enter your name</string>
-    <string name="nameEmptyError">Name can\'t be Empty</string>
-    <string name="startgame">Start the Game</string>
-    <string name="numOfNumbers">Amount of Random Numbers</string>
-    <string name="numOfNumbersValue" translatable="false">%1$d</string>
-    <string name="rangeOfRandom">Range of Random Numbers</string>
-    <string name="rangeOfRandomValue">From %1$d to %2$d </string>
-    <string name="endButton">End Game</string>
-    <string name="totalPlaytime">Total Play Time</string>
-
-
-    <string name="ScoreTitle">Score</string>
     <string name="totalScore">Flips</string>
-
-    <string name="CorrectTextField">Right picks</string>
-    <string name="NegativeTextField">Wrong picks</string>
-    <string name="ScorePlayerName">Player %1$s</string>
-    <string name="newgame">New Game</string>
     <string name="newgamedialog">Start New Game?</string>
     <string name="restartgamedialog">Restart Game?</string>
     <string name="progressLost">All your current progress will be lost</string>
@@ -48,22 +19,6 @@
         <item quantity="zero"> %1$d wrong flips</item>
         <item quantity="one">%1$d wrong flip</item>
         <item quantity="other"> %1$d wrong flips</item>
-    </plurals>
-
-
-    <plurals name="totalScorePlural">
-
-        <item quantity="zero"> %1$d Points</item>
-        <item quantity="one">%1$d Point</item>
-        <item quantity="other"> %1$d Points</item>
-    </plurals>
-
-
-    <plurals name="timePlural">
-
-        <item quantity="zero">You have %1$d seconds left</item>
-        <item quantity="one">You have %1$d second left</item>
-        <item quantity="other">You have %1$d seconds left</item>
     </plurals>
 
 
