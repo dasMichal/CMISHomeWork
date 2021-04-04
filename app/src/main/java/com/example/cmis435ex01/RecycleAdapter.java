@@ -94,26 +94,24 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
 			Log.d("RecycleViewer","cardText.isSelected() = " + cardText.isSelected());
 
-			if (View.VISIBLE == cardText.getVisibility())
-			{
-
-				//System.out.println("Full Field");
-				//notifyItemChanged(selectedPos);
-				//selectedPos = RecyclerView.NO_POSITION;
-
-
-				//cardText.setVisibility(View.INVISIBLE);
-				//listener.test(this.memCard,this.cardText,getItemCount(),getLayoutPosition(),this);
-
-			}
-			else
+			if (View.VISIBLE != cardText.getVisibility())
 			{
 				//System.out.println("Empty Field");
 				//selectedPos = getLayoutPosition();
 				//notifyItemChanged(selectedPos);
+				Log.d("RecycleView","Empty Field");
 
 				cardText.setVisibility(View.VISIBLE);
-				listener.test(this.memCard,this.cardText,getItemCount(),getLayoutPosition(), this);
+				listener.RecycleClick(this.memCard,this.cardText,getItemCount(),getLayoutPosition(), this);
+
+			} else
+			{
+
+				//Log.d("RecycleView","Full Field");
+				//notifyItemChanged(selectedPos);
+				//selectedPos = RecyclerView.NO_POSITION;
+				//cardText.setVisibility(View.INVISIBLE);
+				//listener.test(this.memCard,this.cardText,getItemCount(),getLayoutPosition(),this);
 
 			}
 
