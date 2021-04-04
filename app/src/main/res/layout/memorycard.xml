@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +16,8 @@
             android:elevation="20dp"
             android:foregroundGravity="center_horizontal"
             android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="10dp">
+            android:layout_marginHorizontal="10dp"
+            app:cardBackgroundColor="@color/md_amber_800">
 
         <TextView
                 android:text="TextView"
