@@ -59,8 +59,7 @@ public class MemoryMainGame extends AppCompatActivity
 
 			}
 
-
-			public void test(CardView v, TextView text, int itemCount, int layoutPosition, RecycleAdapter.ViewHolder viewHolder)
+			public void RecycleClick(CardView v, TextView text, int itemCount, int layoutPosition, RecycleAdapter.ViewHolder viewHolder)
 			{
 
 				Log.d("MainGame","itemCount = " + itemCount);
