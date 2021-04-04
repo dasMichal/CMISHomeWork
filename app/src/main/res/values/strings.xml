@@ -25,20 +25,29 @@
 
 
     <string name="ScoreTitle">Score</string>
-    <string name="totalScore">Total Score</string>
+    <string name="totalScore">Flips</string>
 
     <string name="CorrectTextField">Right picks</string>
     <string name="NegativeTextField">Wrong picks</string>
     <string name="ScorePlayerName">Player %1$s</string>
     <string name="newgame">New Game</string>
     <string name="newgamedialog">Start New Game?</string>
+    <string name="restartgamedialog">Restart Game?</string>
+    <string name="progressLost">All your current progress will be lost</string>
 
 
-    <plurals name="pointsPlural">
+    <plurals name="flipsPlural">
 
         <item quantity="zero"> %1$d Flips</item>
         <item quantity="one">%1$d Flip</item>
         <item quantity="other"> %1$d Flips</item>
+    </plurals>
+
+    <plurals name="wrongflipsPlural">
+
+        <item quantity="zero"> %1$d wrong flips</item>
+        <item quantity="one">%1$d wrong flip</item>
+        <item quantity="other"> %1$d wrong flips</item>
     </plurals>
 
 
