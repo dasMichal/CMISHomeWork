@@ -33,9 +33,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 	public interface OnItemClickListener
 	{
 		void onItemClick(Integer item);
-		//void test(CardView v);
 
-		void test(CardView memCard,TextView cardText, int itemCount, int layoutPosition, ViewHolder viewHolder);
+		void RecycleClick(CardView memCard, TextView cardText, int itemCount, int layoutPosition, ViewHolder viewHolder);
 	}
 
 
@@ -134,73 +133,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 		{
 
 
-			/*
-
-			memCard.setOnClickListener(v ->
-			{
-
-
-
-				System.out.println(cardText.isSelected());
-
-				if (v.isSelected())
-				{
-
-					System.out.println("Yes Selected");
-					notifyItemChanged(selectedPos);
-					selectedPos = RecyclerView.NO_POSITION;
-					cardText.setVisibility(View.INVISIBLE);
-
-
-				}
-				else
-				{
-					System.out.println("NoSelected");
-					selectedPos = getLayoutPosition();
-					cardText.setVisibility(View.VISIBLE);
-
-					//notifyItemChanged(selectedPos);
-
-
-				}
-				System.out.println(cardText.getVisibility());
-				notifyItemChanged(selectedPos);
-
-
-				//Toast.makeText(v.getContext(), "position : " + getLayoutPosition() + " text : " + this.cardText.getText(), Toast.LENGTH_SHORT).show();
-
-				listener.test(memCard);
-
-
-			});
-
-			*/
-
 		}
 	}
 
 
 }
 
-
-class Model {
-
-	private boolean isEnabled;
-	private boolean isChecked;
-
-	public void setEnabled(boolean enabled) {
-		isEnabled = enabled;
-	}
-
-	public void setChecked(boolean checked) {
-		isChecked = checked;
-	}
-
-	public boolean isEnabled() {
-		return isEnabled;
-	}
-
-	public boolean isChecked() {
-		return isChecked;
-	}
-}
