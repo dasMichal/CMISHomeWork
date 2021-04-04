@@ -119,11 +119,10 @@ public class MemoryMainGame extends AppCompatActivity
 		if(countFlipped == 2)
 		{
 
+			//TODO ADD FLIP COUNTER
+			//TODO ADD END GAME ACTIVITY
 
 			Log.d("Game Logic","compare(firstTag,secondTag) = " + compare(firstTag, secondTag));
-
-
-
 
 
 			if (compare(firstTag,secondTag))
