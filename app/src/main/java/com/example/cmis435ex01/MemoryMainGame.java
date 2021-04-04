@@ -12,6 +12,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,19 +40,31 @@ public class MemoryMainGame extends AppCompatActivity
 	TextView secondText;
 	CardView firstCard;
 	CardView secondCard;
+	FloatingActionButton fabReset;
+
+	int flipCounter= 0;
+	int wrongflipCounter= 0;
+	TextView flipCounterText;
+	TextView wrongflipCounterText;
+
 
 	static final int duration = 800;
 	private final int score = 0;
 	public CountDownTimer counter;
+	int backFlippedColour ;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_memory_main_game);
+		init();
 
-		recyclerView = findViewById(R.id.MemoryCardHolder);
+		fabReset.show();
 
+		flipCounterText.setText(getResources().getQuantityString(R.plurals.flipsPlural, (int) flipCounter, (int) flipCounter ));
+		wrongflipCounterText.setText(getResources().getQuantityString(R.plurals.wrongflipsPlural, (int) wrongflipCounter, (int) wrongflipCounter ));
 
 		adapter = new RecycleAdapter(memCardContent, new RecycleAdapter.OnItemClickListener()
 		{
@@ -76,6 +91,47 @@ public class MemoryMainGame extends AppCompatActivity
 
 		generateData();
 		Collections.shuffle(memCardContent);
+
+	}
+
+	private void init()
+	{
+		recyclerView = findViewById(R.id.MemoryCardHolder);
+		flipCounterText = findViewById(R.id.totalFlips);
+		fabReset = findViewById(R.id.fabRestart);
+		wrongflipCounterText = findViewById(R.id.wrongtotalFlips);
+		backFlippedColour= getColor(R.color.md_amber_800);
+
+
+
+
+		fabReset.setOnClickListener(v ->
+		{
+
+
+
+			new MaterialAlertDialogBuilder(this)
+					.setTitle(getResources().getString(R.string.newgamedialog))
+					.setMessage(getResources().getString(R.string.progressLost))
+					.setCancelable(false)
+					.setPositiveButton(getResources().getString(R.string.yes),(dialog, which) ->  {
+						{
+							//Recreating the Activity
+							recreate();
+
+
+						}
+					}).show();
+
+
+
+
+			//resetGame();
+
+
+
+
+		});
 
 	}
 
