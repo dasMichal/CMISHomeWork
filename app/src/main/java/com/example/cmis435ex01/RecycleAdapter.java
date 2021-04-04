@@ -1,10 +1,10 @@
 package com.example.cmis435ex01;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -33,8 +33,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 	public interface OnItemClickListener
 	{
 		void onItemClick(Integer item);
+		//void test(CardView v);
 
-		void test(CardView memCard, int itemCount, int layoutPosition, ViewHolder viewHolder);
+		void test(CardView memCard,TextView cardText, int itemCount, int layoutPosition, ViewHolder viewHolder);
 	}
 
 
@@ -83,8 +84,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 			this.cardText = view.findViewById(R.id.cardText);
 			this.memCard = view.findViewById(R.id.memCard);
 
-
-
 			view.setOnClickListener(this);
 
 
@@ -94,8 +93,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 		public void onClick(View view)
 		{
 
-			System.out.println("cardText.isSelected() = " + cardText.isSelected());
-
+			Log.d("RecycleViewer","cardText.isSelected() = " + cardText.isSelected());
 
 			if (View.VISIBLE == cardText.getVisibility())
 			{
@@ -105,8 +103,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 				//selectedPos = RecyclerView.NO_POSITION;
 
 
-				cardText.setVisibility(View.INVISIBLE);
-				listener.test(this.memCard,getItemCount(),getLayoutPosition(),this);
+				//cardText.setVisibility(View.INVISIBLE);
+				//listener.test(this.memCard,this.cardText,getItemCount(),getLayoutPosition(),this);
 
 			}
 			else
@@ -116,14 +114,13 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 				//notifyItemChanged(selectedPos);
 
 				cardText.setVisibility(View.VISIBLE);
-				listener.test(this.memCard,getItemCount(),getLayoutPosition(), this);
+				listener.test(this.memCard,this.cardText,getItemCount(),getLayoutPosition(), this);
 
 			}
 
 
 			//System.out.println("cardText.getVisibility() = " + cardText.getVisibility());
 			//notifyItemChanged(selectedPos);
-
 
 			//Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.cardText.getText(), Toast.LENGTH_SHORT).show();
 
@@ -137,6 +134,47 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 		{
 
 
+			/*
+
+			memCard.setOnClickListener(v ->
+			{
+
+
+
+				System.out.println(cardText.isSelected());
+
+				if (v.isSelected())
+				{
+
+					System.out.println("Yes Selected");
+					notifyItemChanged(selectedPos);
+					selectedPos = RecyclerView.NO_POSITION;
+					cardText.setVisibility(View.INVISIBLE);
+
+
+				}
+				else
+				{
+					System.out.println("NoSelected");
+					selectedPos = getLayoutPosition();
+					cardText.setVisibility(View.VISIBLE);
+
+					//notifyItemChanged(selectedPos);
+
+
+				}
+				System.out.println(cardText.getVisibility());
+				notifyItemChanged(selectedPos);
+
+
+				//Toast.makeText(v.getContext(), "position : " + getLayoutPosition() + " text : " + this.cardText.getText(), Toast.LENGTH_SHORT).show();
+
+				listener.test(memCard);
+
+
+			});
+
+			*/
 
 		}
 	}
@@ -144,3 +182,25 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
 }
 
+
+class Model {
+
+	private boolean isEnabled;
+	private boolean isChecked;
+
+	public void setEnabled(boolean enabled) {
+		isEnabled = enabled;
+	}
+
+	public void setChecked(boolean checked) {
+		isChecked = checked;
+	}
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public boolean isChecked() {
+		return isChecked;
+	}
+}
