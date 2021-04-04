@@ -36,9 +36,9 @@
 
     <plurals name="pointsPlural">
 
-        <item quantity="zero"> %1$d Points</item>
-        <item quantity="one">%1$d Point</item>
-        <item quantity="other"> %1$d Points</item>
+        <item quantity="zero"> %1$d Flips</item>
+        <item quantity="one">%1$d Flip</item>
+        <item quantity="other"> %1$d Flips</item>
     </plurals>
 
 
