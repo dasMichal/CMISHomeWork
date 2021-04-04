@@ -56,20 +56,12 @@ public class MemoryMainGame extends AppCompatActivity
 			@Override
 			public void onItemClick(Integer item)
 			{
-				System.out.println("Hi");
-				System.out.println(item);
-				Collections.shuffle(memCardContent);
-				adapter.notifyDataSetChanged();
 
 			}
 
 
 			public void test(CardView v, TextView text, int itemCount, int layoutPosition, RecycleAdapter.ViewHolder viewHolder)
 			{
-				//System.out.println(v);
-				//System.out.println("itemCount = " + itemCount);
-				//System.out.println("layoutPosition = " + layoutPosition);
-				//recyclerView.getChildAt(layoutPosition).setEnabled(false);
 
 				Log.d("MainGame","itemCount = " + itemCount);
 				logic(v,text,itemCount, layoutPosition, viewHolder);
@@ -79,7 +71,6 @@ public class MemoryMainGame extends AppCompatActivity
 		});
 		recyclerView.setAdapter(adapter);
 		recyclerView.setClickable(true);
-		//recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 		recyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
@@ -95,7 +86,6 @@ public class MemoryMainGame extends AppCompatActivity
 
 		if (countFlipped == 0)
 		{
-
 			Log.d("GameLogic","First Card Flip");
 			firstPos = layoutPosition;
 			firstTag = (String) v.getTag();
@@ -135,27 +125,6 @@ public class MemoryMainGame extends AppCompatActivity
 				secondCard.setCardBackgroundColor(getColor(R.color.md_green_400));
 
 
-
-			}else
-			{
-
-				TypedArray a = getTheme().obtainStyledAttributes(R.style.Theme_CMIS435Ex01, new int[] { R.attr.cardBackgroundColor });
-
-				// Get color hex code (eg, #fff)
-				int intColor = a.getColor(0 /* index */, 0 /* defaultVal */);
-				String hexColor = Integer.toHexString(intColor);
-				// Don't forget to recycle
-				a.recycle();
-
-
-				firstCard.setCardBackgroundColor(getColor(R.color.md_red_200));
-				secondCard.setCardBackgroundColor(getColor(R.color.md_red_200));
-
-				progress3(firstText,secondText,firstPos,secondPos, intColor); // Creating a Countdown timer
-				counter.cancel(); // For Safety cancel a possible running countdown Timer
-				counter.start(); // Start a new countdown Timer
-
-
 			}
 
 			countFlipped = 0;
@@ -170,8 +139,6 @@ public class MemoryMainGame extends AppCompatActivity
 
 		counter = new CountDownTimer(duration, 1000)
 		{
-			final int half = ((duration / 2) / 1000);
-			final int progressStatus = 0;
 
 			@Override
 			public void onTick(long millisUntilFinished)
@@ -203,8 +170,6 @@ public class MemoryMainGame extends AppCompatActivity
 
 	private void generateData()
 	{
-
-
 		for (int i = 0; i < 8; i++)
 		{
 			memCardContent.add(list2.get(i));
@@ -214,7 +179,4 @@ public class MemoryMainGame extends AppCompatActivity
 		adapter.notifyDataSetChanged();
 
 	}
-
-
-
 }
