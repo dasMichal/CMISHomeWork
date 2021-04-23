@@ -10,19 +10,19 @@ import java.util.stream.Stream;
 public class RandEmoji
 {
 
+
+	List<String> list = Stream.of("🍕", "🌭","🏓","🙈","🛠","⚽","🌈","🥫","🍝", "🍜" ,"🍲", "🍛", "🍣" ,"🍱", "🥟", "🦪", "🍤", "🍙", "🍚", "🍘", "🍥", "🥠", "🥮", "🍢", "🍡", "🍧", "🍨", "🍦", "🥧", "🧁").collect(Collectors.toList());
+	List<String> list3 = new ArrayList<>();
+
 	private final Random r = new Random();
 
-	List<String> memCardContent = new ArrayList<>();
-	List<String> list = Stream.of("🍕", "🌭","🏓","🙈","🛠","⚽","🌈","🥫","🍝", "🍜" ,"🍲", "🍛", "🍣" ,"🍱", "🥟", "🦪", "🍤", "🍙", "🍚", "🍘", "🍥", "🥠", "🥮", "🍢", "🍡", "🍧", "🍨", "🍦", "🥧", "🧁").collect(Collectors.toList());
-	//List<String> list2 = Stream.of("🍕","🍕","🌭","🌭","🍥","🍥","⚽","⚽").collect(Collectors.toList());
-	List<String> list3 ;
 
 
-	public void RandEmojiList()
+	public List<String> RandEmojiList()
 	{
 
 		// Create random numbers and add them to List
-		list3.clear();
+		//list3.clear();
 
 
 		for (int i = 0; i < 4; i++)
@@ -49,24 +49,23 @@ public class RandEmoji
 
 			}while(!notInList);
 
-
-
 		}
 
 
+		list3.addAll(list3);
+
+		return list3;
+
 	}
+
+
 
 	public List<String> getEmojiList()
 	{
+
 		return list3;
 	}
 
-
-
-	public void setRandNum(int rNum)
-	{
-		this.rNum = rNum;
-	}
 
 
 

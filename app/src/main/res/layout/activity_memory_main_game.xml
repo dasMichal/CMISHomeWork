@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable
+                name="viewmodel"
+                type="com.example.cmis435ex01.viewmodel.MainViewModel" />
+    </data>
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MemoryMainGame">
+        tools:context=".view.MainActivity">
+
 
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="395dp"
+            android:layout_height="437dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +36,7 @@
             app:layout_constraintVertical_bias="0.0"
             android:layoutAnimation="@anim/layout_animation"
             android:animationCache="true"
-            android:animateLayoutChanges="false" >
+            android:animateLayoutChanges="false">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -47,7 +61,9 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:text="@string/totalScore"
+
+
+                    android:text="@{viewmodel.totalFlipsLiveData}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/totalFlips"
@@ -56,9 +72,10 @@
                     android:layout_marginVertical="5dp"
                     android:gravity="center"
                     android:layout_gravity="center" />
+            <!-- android:text="@{viewmodel.totalFlipsLive}" -->
 
             <TextView
-                    android:text="@string/totalScore"
+                    android:text="@{viewmodel.totalWrongFlipsLiveData}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/wrongtotalFlips"
@@ -67,7 +84,7 @@
                     android:layout_marginVertical="5dp"
                     android:gravity="center"
                     android:layout_gravity="center" />
-
+            <!-- android:text="@{viewmodel.totalWrongFlipsLive}" -->
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -89,6 +106,7 @@
             android:scaleType="center"
             app:fabCustomSize="80dp"
             android:tooltipText="@string/restartgamedialog"
-            android:contentDescription="Restarts the Memory Game" />
+            android:contentDescription="@string/restarts_the_memory_game" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
