@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">HW2SznurczakMemoryGame </string>
+    <string name="app_name">HW2SznurczakMemoryGameMVVM</string>
     <string name="yes">Yes</string>
     <string name="totalScore">Flips</string>
     <string name="newgamedialog">Start New Game?</string>
     <string name="restartgamedialog">Restart Game?</string>
     <string name="progressLost">All your current progress will be lost</string>
+    <string name="restarts_the_memory_game">Restarts the Memory Game</string>
 
 
     <plurals name="flipsPlural">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"HW2SznurczakMemoryGame "</string>
+    <string name="app_name">HW2SznurczakMemoryGameMVVM</string>
     <string name="totalScore">Umdrehungen</string>
 
 
@@ -22,4 +22,5 @@
     <string name="newgamedialog">Neues Spiel Starten?</string>
     <string name="restartgamedialog">Spiel Neustarten?</string>
     <string name="progressLost">Der aktuelle Fortschritt wird gelöscht</string>
+    <string name="restarts_the_memory_game">Startet das Memory Spiel neu</string>
 </resources>
